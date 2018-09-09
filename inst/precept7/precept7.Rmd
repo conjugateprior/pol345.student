@@ -1,0 +1,113 @@
+<!-- -->
+ margins
+<!-- -->
+ hyperref options ===
+<!-- -->
+ set this to 1 if want to print solutions
+<!-- -->
+ document starts here
+{
+\framebox{#1}
+}
+<!-- -->
+ document starts here
+In this handout, we will learn how to test difference-in-means using the function {\tt lm()}.  We will include some more practice using loops.
+- Fitting a linear model to estimate a difference-in-means\vspace{-0.125in}
+- Interpreting the coefficients \vspace{-0.1in}
+- Assessing statistical significance \vspace{-0.1in}
+- Running a loop with the command {\tt for( ) } \vspace{-0.125in}
+- Estimating a difference-in-means using {\tt lm( y $\sim$ x)}\vspace{-0.125in}
+- Calculating a difference-in-mean using {\tt lm( y $\sim$ x)}, where {\tt x} \vspace{-0.125in}
+- Using {\tt summary( )} to return the output from {\tt lm( )}\vspace{-0.125in}
+- Using {\tt summary( )\$coef} to extract coefficients, standard errors, $t$-values, and $p$-values from {\tt lm( )}\vspace{-0.125in}
+- Using {\tt rowMeans( )} and {\tt colMeans( )} to return the means of the rows or columns of a matrix\vspace{-0.125in}
+- Creating a pdf with {\tt pdf( )}\vspace{-0.125in}
+- Running a file with the command {\tt source( )}\vspace{-0.125in}
+- Loading an {\bf R} data file of the form {\it XXX.Rdata} with the command {\tt load( )}\vspace{-0.125in}
+}
+}
+{\bf Before beginning this handout,
+Do not forget to make a new folder for this assignment and set your working directory!}
+# Using a Linear Model to Test Differences-in-Means
+A recent paper,``The Multiple Effects of Casualties on Public Support for War," explored the relationship between gender and support for the Iraq War.  We can state this as a two-sample problem: what is the difference in support for the Iraq War between males and females?  Of course, there is going to be {\it some} difference between these two means, so what we really want to know is whether the effect is {\it statistically significant}.  Statistical significance means, informally, that we can differentiate the observed difference from chance error.  A bit more formally, an effect is statistically significant at the 5\% level  if the probability of observing the observed difference in means if, in truth,  there were no effect is 5\% or less.  While the logic may seem, at first, a bit serpentine, a few examples can help illustrate how the concepts are used in practice.
+We will use the command {\large \tt lm()} to estimate the difference-in-means between two groups.  ``$lm$'' stands for ``linear model,'' which we will be discussing quite a bit.  The linear model allows a means to test the difference-in-means between two groups, but you will see that it can also be used for multivariate regression.  
+Recall that a linear regression is a model for the outcome $Y$, of the form
+Y_i=\beta_0 +\beta_1 X_i +\epsilon_i
+In this model, we are assuming that our observed value $Y_i$ is equal to some expected value that depends on the value of $X_i$:
+plus chance error ($\epsilon_i$).   So, the expected value of $Y_i$ if $X_i=0$ is $\beta_0$ and the expected value of $Y_i$ if $X_i=1$ is  $\beta_0 +\beta_1$.  Therefore, the  effect of $X_i$ is
+The linear model returns fitted values of the form
+where $\widehat\beta_1$ is the estimate of the effect of $X_i$ on $Y_i$.  In other words, $\widehat \beta_1$ is the estimate of the difference-in-means for $Y_i$ between the groups $X_i=1$ and $X_i=0$
+In {\bf R}, we use the command {\bf lm()} to fit a linear model.  The command {\large \tt lm()} takes a formula of the form $Y \sim X$, where $Y$ is the outcome variable (dependent variable) and $X$ is the treatment (independent variable).  Let's start with loading in the data.  The data contains the variable {\tt female} which is a 1 if the respondent is female, and a 0 otherwise, and a variable {\tt mistake} which takes a value of 1 if the respondent felt that the Iraq War was a mistake, and a 0 otherwise.  First, load and summarize the data:
+```{r }
+load("iraq.RData")
+head(iraq)
+summary(iraq)
+```
+To assess the difference-in-means, we are going to fit a linear model, and look at it:
+```{r }
+lm1<-lm(iraq$mistake ~ iraq$female)
+lm1
+mean(iraq$mistake[ iraq$female == 0]) #Intercept
+mean(iraq$mistake[ iraq$female == 1]) - 
+mean(iraq$mistake[ iraq$female == 0]) #Coefficient
+```
+We can interpret the first coefficient as the mean for males ({\tt female = 0}), and the second coefficient as the difference-in-means between females and males.  In other words, women were approximately 4.44 percentage less likely to think the Iraq War was a mistake.  
+Is the effect statistically significant?  Let's use the command {\large \tt summary()} to return the details from the {\large \tt lm()} object:
+```{r }
+summary(lm1)
+```
+We see that it is not.  The $p$-value, in the last column, is approximately 0.21, which is not below the standard 5\% threshold.   In other words, we cannot reject the null hypothesis that the difference between males and females is zero.
+The command {\large \tt summary()\$coef} allows you to access to the coefficients, standard errors, $t$-statistics, and $p$-values of the regression:
+```{r }
+summary(lm1)$coef
+```
+Then, if we wanted the coefficient and the  $p$-value for the effect due to being female, we would use
+```{r }
+##Coefficient
+summary(lm1)$coef[2,1]
+##p-value
+summary(lm1)$coef[2,4]
+##95% Confidence interval
+mean.iraq <- summary(lm1)$coef[2,1] # Difference in means
+se.iraq <- summary(lm1)$coef[2,2] #Standard error
+c( mean.iraq - 1.96 * se.iraq, mean.iraq + 1.96 * se.iraq)
+``` 
+# A Second Example: Growth During Wartime
+We turn next to the relationship between civil war and GDP. A broad range of literature in International Relations and Comparative Politics explores the relationship between civil war and economic growth. The literature has argued that the incidence of civil war is often associated with low levels of development and economic growth.  We rely on the {\tt    growth.RData} data set.  The data set contains the following variables:
+- {\tt year} - year of observation
+- {\tt country} - country
+- {\tt war} - binary indicator of civil war (1 if the country experienced 
+civil war in the observed year, 0 else)
+- {\tt gdppc} - GDP per capita for the year of observation
+- {\tt gdppc.lag} - GDP per capita from the previous year
+- {\tt growth.rate} - GDP per capita growth rate, in percentage points
+First, we read in the data.
+```{r }
+load("growth.RData") # Load data
+head(growth)
+summary(growth)
+```
+To begin, we wish to consider the association between civil war and levels of economic development. As such, we wish to compare the GDP per capita between countries that experienced a war versus those that did not.  We would expect those countries that experience war to have levels of economic development (i.e.: measured as GDP per capita) that are significantly lower than countries that do not experience war.  Due to the skew in the data, we must log GDP per capita.
+```{r }
+growth$log.growth <- log( growth$gdppc) # Log data
+lm2<-lm(growth$log.growth~growth$war) # Estimate diff in means
+summary(lm2) # Return results
+```
+We observe that growth rates are lower by about $-0.67$ in countries at war versus countries not at war.  The result is statistically significant, since the $p$-value on the difference-in-means ({\tt 2 e-6}) is much lower than 0.05.  Therefore, we can reject the null hypothesis that the difference in growth between countries at war and not at war is zero.
+That said, is the effect causal?  As you may have guessed, no.  There are any other number of possible confounders and omitted variables.  We will start discussing how to handle them in the next handout.
+# Problems
+- Recall the social pressure experiment, which we discussed in class.  In this experiment, researchers administered sent one of four different postcards to Michigan voters in 2006, as well as maintaining a control group that received no such postcard.  The outcome was whether the respondent voted or not.  We will be considering the treatment of whether the individual received a postcard alerting her to her neighbor's voting behavior and letting her know that her neighbors will be made aware of her behavior (1) versus the control condition of receiving no postcard.  On Blackboard, you will find the file {\tt social.txt}.  
+- Was the treatment effect positive or negative?  Was it statistically significant?  
+- Construct a 95\% and confidence interval.  What is the confidence interval telling us?
+- Can we interpret the effect in a causal fashion?  Why or why not?
+- (Practice with a Loop -- do what you can with this one, and then we will discuss it in precept) We're going to continue with some data from the New Haven experiment, which we discussed in the last handout.  You will find on Blackboard a file {\tt GerberGreenSubset.txt}, which contains the following variables:
+- {\tt voted98}: 1 if they voted in the 1998 election, 0 otherwise (dependent variable)\vspace{-.1in}
+- {\tt mailgrp}: 1 if they were sent mail encouraging them to vote; 0 otherwise\vspace{-.1in}
+- {\tt ward}: voting ward of household $(2, 3, ..., 30)$\vspace{-.1in}
+- {\tt appeal}: Type of appeal (1, 2, 3)\vspace{-.1in}
+- {\tt mail}: Number of mailings sent (0,1,2,3)\vspace{-.1in}
+You notice that mailings have no significant effect on turnout.  Yet, pretend you are a less-than-scrupulous purveyor of campaign mailings.  You get your hand on Gerber and Green's data, and do the following:
+-  For every possible combination of number of mailings (1, 2, 3), appeal (1, 2, 3), and ward (2, 3,$...$, 30) calculate the treatment effect of receiving the mailings and its $p$-value.   (Hint: this is a triple loop.)
+- What percentage of your $p$-values are below 0.05?  What percentage would you expect by chance?
+-  Being less-than-scrupulous, you assert that you have found significant results--lots of them!  Why should your customers be wary of the claim that mailings have an impact?  
+- Explain why this process is termed ``data-fishing,'' and why it is frowned upon.
