@@ -1,0 +1,314 @@
+---
+title: "Precept 9"
+author: "Student von Student III"
+output:
+  pdf_document: default
+  html_document: default
+bibliography: bib/precept9.bib
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(comment = "")
+```
+
+In this handout, we are going to revisit the Reinhart and Rogoff data. 
+We are going to try to uncover, if we can, any causal relationship between 
+debt-to-GDP ratios and growth rates.
+
+## Topics and Concepts Covered
+
+- Fitting and interpreting a linear model
+- Granger-causality with panel data
+- Fixed-effects for giving each observation its own baseline
+
+## R Commands Covered 
+
+- More on conditional plots using `coplot`
+- Adding fixed effects in `lm` using `factor`
+- Using `summary$coef` to extract coefficients, standard errors, t-values, 
+  and p-values from `lm`
+
+# Reinhart and Rogoff: An Analysis
+
+To study sovereign debt and economic growth, the economists Carmen Reinhart 
+and Ken Rogoff [@Reinhart.Rogoff2010] have constructed an impressive data 
+set that encompasses over 70 countries and 800 years worth of observations 
+including variables such as inflation, exchange rates, debt-to-GDP ratios and 
+categorical 
+variables indicating whether a country is suffering from a debt, inflation 
+or banking crisis. While the research is multi-faceted, the aspect that has 
+received the most public attention is the claim that once a country's debt-to-GDP 
+ratio crosses a threshold of approximately 90%, growth rates plummet.  
+
+This argument is not strictly academic; policy makers in both the US and 
+Europe have been arguing over whether the current economic downturn should be 
+greeted with more or less government spending, viewpoints I will be referring 
+to as "Keynesian" and "austerian."  In a nutshell, the Keynesian argument 
+is that governments should spend less during times of economic growth and more 
+during times of economic downturn.  Normally, this process is handled by the 
+Federal Reserve, through adjusting interest rates (through buying or selling US 
+Treasury Bonds). 
+
+At the moment, interest rates are approximately zero.  Since the Federal 
+Reserve cannot lower interest rates below zero, the Fed's direct policy 
+interventions have been exhausted (QE1 and QE2 are indirect). Government 
+spending is the only alternative when interest rates are at zero, since 
+private spending is not able to fill the output gap in the short-run. 
+The Keynesians argue that the government should assume more debt when interest 
+rates are around zero, to fill this output gap.  
+
+The austerian argument leads to the opposite policy prescription.  Austerians 
+argue that spending through deficit-financing will lead to the accumulation of 
+more debt, increasing the risk of future sovereign default.  This increase in 
+risk will raise interest rates in the future.  Since these future expectations 
+are factored into today's investment and consumption decisions, increasing debt 
+will place an upward pressure on *present* interest rates, slowing down current 
+growth.
+
+### Reinhart and Rogoff: The Controversy
+
+As mentioned above, Reinhart and Rogoff provide(d) a key piece of empirical 
+evidence to the austerians: countries above the debt-to-GDP threshold of about 
+90% face precipitous growth declines.  A recent study, put out by Herndon et al. 
+at U. Mass-Amherst, shows that the 90% threshold is a result of poor data 
+analysis by Reinhart and Rogoff.  We are going to build off of Herndon's analysis.
+
+Though not required for his handout, I recommend referring to the following articles if you are interested in this data and the debate:
+
+- The original paper positing the 90% threshold: @Reinhart.Rogoff2010
+- Herndon et al.'s reply: @Herndon.etal2014 You should focus on the first 10 
+  pages or so
+- Stephen Colbert 
+  [weighs in](http://www.colbertnation.com/the-colbert-report-videos/425748/april-23-2013/austerity-s-spreadsheet-error?xrs=share_copy) on the issue
+
+A few more resources, if you find the topic interesting, are:
+
+- Reinhart and Rogoff 
+  [respond](http://www.nytimes.com/2013/04/26/opinion/debt-growth-and-the-austerity-debate.html?pagewanted=all) in the New York Times to the Herndon et al. paper 
+- Herndon's co-authors 
+  [respond to their response](http://www.nytimes.com/2013/04/30/opinion/debt-and-growth-a-response-to-reinhart-and-rogoff.html?_r=0), also in the New York Times
+- An early critique by Irons and Bivens: [@Irons.Bivens2010]
+  [(link)](http://www.epi.org/page/-/pdf/BP271.pdf). See especially the section 
+  on causality 
+- A [blog post](http://www.nextnewdeal.net/rortybomb/researchers-finally-replicated-reinhart-rogoff-and-there-are-serious-problems)
+  and [follow up](http://www.nextnewdeal.net/rortybomb/reinhart-rogoff-week-later-why-does-matter) 
+  on 'Rortybomb' laying out the issues involved
+
+In the data folder you will find a file `RR.lags.csv`. 
+This file contains the variables considered by Herndon, et al. 
+We will focus on the following variables:
+
+- `Country`: The country with observation
+- `Year`: The year of the observation
+- `Infl`}: Inflation rate
+- `dRGDP`: Percent difference in real GDP (i.e. inflation-adjusted) from 
+   last year to the current year
+- `debtgdp`: Debt-to-GDP ratio
+- `lag.debtgdp1`, `lag.debtgdp2`, `lag.debtgdp3`: Lagged values of the 
+  debt-to-GDP ratio (i.e. if the observation is made in 1990, these are the 
+  debt-to-GDP ratios for that country in 1989, 1988, and 1987)
+- `dRGDP1`, `dRGDP2`, `dRGDP3`: Lagged values of the percentage difference 
+   in `dRGDP`
+
+## Conditional Plots for Causal Analysis
+
+The Reinhart and Rogoff data pose a particular problem: there is absolutely no 
+hope of conducting an experiment, yet answering the central macroeconomic 
+question of our data involves discerning a causal claim of some type.  There 
+are four different claims we can make:
+
+1. Current GDP growth is caused by past debt (the austerian argument)
+2. Current debt is  caused by past GDP growth (the Keynesian argument)
+3. The two appear to cause each other
+4. There is no  causal relationship between GDP and debt 
+
+We are going to start going through these different claims, in order to 
+ascertain which is most consistent with the data.  Let's first read in the 
+data.
+
+```{r}
+RR <- read.csv("data/RR.lags.csv", header = TRUE)
+head(RR)
+attach(RR)
+```
+
+Next, we are going to look at a conditional plot.
+
+```{r}
+coplot(dRGDP ~ lag.debtgdp1 | lag.dRGDP1)
+```
+
+(You can ignore the line `missing.rows`.  It is telling you that there is 
+some missing data).
+
+We are going to clean up the conditional plot a little bit.  Instead of 2 x 3, 
+let's make it a single row, with four panels.  Also, let's get rid of the box 
+up top, giving you the range of the conditioning variable.  Finally, we can add 
+a smooth curve to each panel, showing if there is any relationship between the 
+variables in that panel.  We do this with
+
+```{r}
+coplot(dRGDP ~ lag.debtgdp1 | lag.dRGDP1, 
+       panel = panel.smooth, number = 4, 
+       rows = 1, show.given = FALSE)
+```
+
+Note the additions added into the call to `coplot`.  These are
+
+
+- `panel = panel.smooth` adds the smooth curves to each line
+- `number = 4` tells how many boxes to produce for the figure
+- `rows = 1` tells how many rows to use for the figure
+- `show.given = FALSE` tells whether to include the component up top with 
+   the range of the conditioning variables.
+
+### Interpretation
+
+The conditional plot allows us to assess the extent to which debt-to-GDP 
+ratios in the previous time are predictive of current growth, if previous growth 
+is held relatively constant.  Each column of the conditional plot plots 
+previous debt-to-GDP versus current growth rates.  The leftmost column 
+considers a set of homogenous observations, in the sense that their previous 
+growth rate was low.  The rightmost column considers observations for which 
+the growth rate was highest.  From this figure there appears, at best, a 
+weak relationship between previous debt-to-GDP and current growth, if we adjust 
+for the confounding of previous growth.  This provides some suggestive evidence 
+that previous debt is not causing a drop in current growth rates.
+
+## Do Past Values of Debt Predict Future Levels of Growth?
+
+Next, we are going to do the same sort of assessment, except using linear models, 
+with `lm`.  We are going to see, first, whether past values of growth and 
+debt-to-GDP are predictive of current GDP growth.  We will do this through two 
+linear models:
+```{r}
+lm1 <- lm(dRGDP ~ lag.dRGDP1 + lag.debtgdp1)
+lm2 <- lm(dRGDP ~ lag.dRGDP1 + lag.dRGDP2 + lag.debtgdp1 + lag.debtgdp2)
+```
+
+To summarize these models, we can simply use `summary`. The results for the 
+first model are:
+```{r}
+summary(lm1)
+```
+and for the second model are:
+```{r}
+summary(lm2)
+```
+
+Let's focus in on `lm2`.  We have created a regression where we want to see 
+if *past* values of debt-to-GDP are predictive of *current* levels of growth, 
+after accounting for previous values of *previous* levels of growth.  The 
+$p$-values on previous debt-to-GDP (`lag.debtgdp1`, `lag.debtgdp2`) are both 
+well above 0.05.  Therefore, these effects are not significant.  
+
+We have just shown that debt-to-GDP does not **Granger-cause** growth.  This 
+method, named after Clive Granger, strives to discern causal relationships 
+from panel data (like when we observe the same countries over multiple years). 
+We cannot use the method to claim that one variable causes another, but we can use 
+it to say that one does not Granger-cause another. Basically, if a lagged 
+independent variable is not predictive of the current levels of an outcome, 
+when including previous values of the outcome as a predictor, then the 
+independent variable does not Granger-cause the outcome.  If the lagged value of the independent variable is predictive of the current outcome, when including the 
+lagged outcome, then we can't say that the independent variable does not 
+Granger-cause the outcome.
+
+If that seems unfortunately circuitous, well, that's what happens when we try 
+to extract causal claims from observational data in which an experiment is 
+impossible.  We can make headway, and reasonable arguments, but the analysis 
+will require some logic and hedging.  
+
+## Adding Fixed Effects
+
+Recall that we are looking at panel data, in that we are observing the same 
+observation (country) over multiple time periods.  Often, when people analyze 
+panel data, they will add *fixed effects* for each observation.  These 
+fixed effects can be thought of as giving each country its own intercept - 
+we may want to include a term in the model that is simply an indicator variable 
+for being that particular country.  For example, let's do the same analysis as 
+above, but with fixed effects by country:
+
+```{r}
+lm3 <- lm(dRGDP ~ lag.dRGDP1 + lag.debtgdp1 + factor(Country))
+summary(lm3)
+```
+
+You will notice in the regression table that each country, except one, gets 
+its own intercept.  R will automatically drop the first level, which is 
+Australia, in this data.  The fixed effect is a means of capturing 
+unexplained heterogeneity across countries.  You do not know what, exactly, is 
+unique about, say, Denmark, but the Denmark fixed effect of $-0.865$, gives 
+all observations from Denmark a baseline specific to Denmark.  Normally, 
+when we encounter panel data, we add fixed effects for each observation 
+(`Country`), by time period (`Year`), or both.  
+
+In terms of our analysis, note that the $p$-value on previous debt-to-GDP is no 
+longer significant at the 0.05 level ($p = 0.0901$).  It appears that, in this 
+model as well, previous debt-to-GDP is not Granger causing current growth.
+
+## Precept Problems
+
+In these problems, you are going to continue the analysis from above.
+
+### Question 1
+
+One observation has a value of `dRGDP` greater than 25!  Find this 
+observation, and explain why the value is so high.
+```
+
+```
+
+## Question 2
+
+Next, revisit the conditional plot from the first part.  This time evaluate 
+whether previous GDP has a predictive effect on current debt-to-GDP, after 
+accounting for the confounding of previous debt-to-GDP.  
+```{r}
+
+```
+
+Taken together, what 
+do these two figures suggest about the causal relationship between debt-to-GDP 
+and growth?
+```
+
+```
+
+## Question 3
+
+Repeat the same set of regressions from the second part, but try to explain 
+current debt-to-GDP, instead of growth.  Please try it without fixed effects, 
+and then with different fixed effects specifications (country, year, 
+country and year).
+```{r}
+
+```
+
+
+## Question 4
+
+Imagine you are at a conference with David Cameron, Angela Merkel, Barack Obama, 
+and Shinzo Abe.  (If you don't know who these people are, please look them up.) 
+Ben Bernanke is moderating.  Reinhart and Rogoff just presented their data (which, 
+in fairness, involves more than we are looking at).  They end up quoting an 
+IMF report, which states:
+
+> Much of the empirical work on debt overhangs seeks to identify the 
+> 'overhang threshold' beyond which the correlation between debt and growth 
+> becomes negative. The results are broadly similar: above a threshold of 
+> about 95 percent of G.D.P., a 10 percent increase in the ratio of debt 
+> to G.D.P. is identified with a decline in annual growth of about 0.15 
+> to 0.20 percent per year. [(link)](http://www.nytimes.com/2013/04/26/opinion/reinhart-and-rogoff-responding-to-our-critics.html)
+
+When they finish, the audience turns and looks to you.  What do you say?
+
+(You should have no doubt, by now, of my opinion on this issue.  I cannot 
+claim Absolute Correctness on this issue.  If you disagree, feel free, and 
+back it up however you wish---using this data, other citations, whatever works for you.)
+
+```
+
+```
+
+# References
+
