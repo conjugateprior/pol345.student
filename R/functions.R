@@ -1,6 +1,6 @@
 #' pol345
 #'
-#' This package contains problem sets from
+#' This package contains precept materials for
 #' Marc Ratkowic's version of POL 345.
 #'
 #' @section Unpacking Precept Materials:
@@ -18,7 +18,7 @@
 #'
 #' @section Starting Again:
 #' If you want to start again on the same precept, you'll can unpack the
-#' problem set again under a different name (\code{\link{get_precept}} won't
+#' precept materials again under a different name (\code{\link{get_precept}} won't
 #' overwrite an existing folder.)  To do this use the
 #' \code{newname} argument.  If you want your new copy to be called
 #' 'precept2-forreal', then use
@@ -29,8 +29,8 @@
 #' current working directory, you'll get a fresh set of precept materials
 #' unpacked there.
 #'
-#' If you want to preview the questions in a problem set without
-#' unpacking it into your file system, use \code{\link{preview_precept}}.
+#' If you want to preview the questions in a precept materials without
+#' unpacking it into your local file system, use \code{\link{preview_precept}}.
 #'
 #' @docType package
 #' @name pol345
@@ -41,21 +41,23 @@ get_precept_by_number <- function(num){
               package = "pol345")
 }
 
-#' Unpack a problem set by number
+#' Unpack Precept Materials by Number
 #'
-#' This function finds a problem set by its number,
+#' This function finds a precept materials by its number,
 #' unpacks it into your current working directory, and
 #' provides some hints to get going.
 #'
-#' By default the problem set will unpack into a folder of the same name.
-#' If you'd prefer to unpack the problem set under a different name, perhaps
+#' By default the precept materials will unpack into a folder called, e.g.
+#' 'precept7' if 7 is the number you provided.
+#'
+#' If you'd prefer to unpack the materials under a different name, perhaps
 #' because you've decided to start fresh, or because for whatever reason there's
 #' already a folder with that name where you want to unpack it, use the
 #' \code{newname} argument to asign a new one.  (Note that this only renames the
 #' top folder. The contents are keep their original names.)
 #'
 #' @param pnum Number of precept
-#' @param newname Your preferred name for the unpacked problem set.
+#' @param newname Your preferred name for the unpacked precept materials.
 #'                (Default: NULL)
 #' @seealso \code{\link{preview_precept}} to see precept without
 #'          unpacking anything.
@@ -121,9 +123,9 @@ get_precept <- function(pnum, newname = NULL){
   }
 }
 
-#' Preview a precept
+#' Preview Precept Materials
 #'
-#' Launches the pdf viewer to show the questions in a problem set.
+#' Launches the pdf viewer to show the questions in some precept materials.
 #'
 #' @param pnum Precept number
 #'

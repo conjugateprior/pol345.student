@@ -1,15 +1,16 @@
 Package: pol345
-Title: Precept Material for Politics 345
-Version: 0.0.0.9000
-Authors@R: person("Will", "Lowe", email = "wlowe@princeton.edu", role = c("aut", "cre"))
-Description: Data package containing precept material Politics 345.
-Depends: R (>= 3.5.1)
+Title: Precept Materials for Politics 345
+Version: 0.1.0
+Authors@R: c(
+  person("Will", "Lowe", email = "wlowe@princeton.edu", role = c("aut", "cre")), 
+  person("Marc", "Ratkowic", email = "ratkovic@princeton.edu", role = "ctb"))
+Description: Data package containing precept materials for Politics 345.
+Depends: R (>= 3.4)
 Imports: cli
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Suggests: testthat,
   knitr,
   rmarkdown
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
-
