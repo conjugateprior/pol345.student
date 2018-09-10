@@ -15,3 +15,5 @@ Suggests: testthat,
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/conjugateprior/pol345.student
+BugReports: https://github.com/conjugateprior/pol345.student/issues
