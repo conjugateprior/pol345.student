@@ -1,6 +1,6 @@
 Package: pol345.student
 Title: Precept Materials for Politics 345
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
   person("Will", "Lowe", email = "wlowe@princeton.edu", role = c("aut", "cre")), 
   person("Marc", "Ratkowic", email = "ratkovic@princeton.edu", role = "ctb"))
