@@ -38,7 +38,7 @@ NULL
 
 get_precept_by_number <- function(num){
   system.file(file.path("extdata", paste0("precept", num, ".zip")),
-              package = "pol345")
+              package = "pol345.student")
 }
 
 #' Unpack Precept Materials by Number

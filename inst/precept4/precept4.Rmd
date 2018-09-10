@@ -2,8 +2,8 @@
 title: "Precept 4"
 author: "Student von Student III"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 bibliography: bib/precept4.bib
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Precept 1"
+title: "Precept 2"
 author: "Student von Student III"
 output:
   pdf_document: default
