@@ -1,4 +1,4 @@
 library(testthat)
-library(pol345)
+library(pol345.student)
 
-test_check("pol345")
+test_check("pol345.student")

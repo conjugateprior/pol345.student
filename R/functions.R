@@ -1,4 +1,4 @@
-#' pol345
+#' pol345.student
 #'
 #' This package contains precept materials for
 #' Marc Ratkowic's version of POL 345.
@@ -33,7 +33,7 @@
 #' unpacking it into your local file system, use \code{\link{preview_precept}}.
 #'
 #' @docType package
-#' @name pol345
+#' @name pol345.student
 NULL
 
 get_precept_by_number <- function(num){

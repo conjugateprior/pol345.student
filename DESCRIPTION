@@ -1,10 +1,11 @@
-Package: pol345
+Package: pol345.student
 Title: Precept Materials for Politics 345
 Version: 0.1.0
 Authors@R: c(
   person("Will", "Lowe", email = "wlowe@princeton.edu", role = c("aut", "cre")), 
   person("Marc", "Ratkowic", email = "ratkovic@princeton.edu", role = "ctb"))
-Description: Data package containing precept materials for Politics 345.
+Description: This package allows students to unpack and complete the 
+             precept exercises for Princeton's Politics 345 class.
 Depends: R (>= 3.4)
 Imports: cli
 RoxygenNote: 6.1.0
