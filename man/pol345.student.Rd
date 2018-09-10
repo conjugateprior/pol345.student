@@ -4,21 +4,21 @@
 \name{pol345.student}
 \alias{pol345.student}
 \alias{pol345.student-package}
-\title{pol345.student}
+\title{The pol345.student Package}
 \description{
-This package contains precept materials for
+This package contains handouts for
 Marc Ratkowic's version of POL 345.
 }
-\section{Unpacking Precept Materials}{
+\section{Unpacking Handout Materials}{
 
 
-Use \code{\link{get_precept}}, with a number to unpzck precept materials
+Use \code{\link{get_handout}}, with a number to unpack handout materials
 in a local directory.  For example:
 
-\code{get_precept(2)}
+\code{get_handout(2)}
 
-This will unpack the second precept materials into a folder called
-'precept2` in your current working directory.
+This will unpack the second handout materials into a folder called
+'handout2` in your current working directory.
 (Type \code{\link{getwd}} if you're
 not sure where that is.  You can change it using \code{\link{setwd}} or
 through the graphical user interface).
@@ -26,19 +26,19 @@ through the graphical user interface).
 
 \section{Starting Again}{
 
-If you want to start again on the same precept, you'll can unpack the
-precept materials again under a different name (\code{\link{get_precept}} won't
+If you want to start again on the same handout, you'll can unpack the
+handout materials again under a different name (\code{\link{get_handout}} won't
 overwrite an existing folder.)  To do this use the
 \code{newname} argument.  If you want your new copy to be called
-'precept2-forreal', then use
+'handout2-forreal', then use
 
-\code{get_precept(2, newname = "precept2-forreal")}
+\code{get_handout(2, newname = "handout2-forreal")}
 
 Provided there's not already a folder of that name in your
-current working directory, you'll get a fresh set of precept materials
+current working directory, you'll get a fresh set of handout materials
 unpacked there.
 
-If you want to preview the questions in a precept materials without
-unpacking it into your local file system, use \code{\link{preview_precept}}.
+If you want to preview the questions in a handout materials without
+unpacking it into your local file system, use \code{\link{preview_handout}}.
 }
 

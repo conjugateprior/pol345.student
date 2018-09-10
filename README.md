@@ -1,8 +1,7 @@
 # The pol345.student package
 
-`pol345.student` allows students to unpack and complete precepts for
-Princeton University's course Politics 345 (as run by Marc Ratkowic
-and Will Lowe in Fall 2018).
+`pol345.student` allows students to unpack and complete questions
+in the handout for Princeton University's course Politics 345 (as run by Marc Ratkowic and Will Lowe in Fall 2018).
 
 ## Installation
 

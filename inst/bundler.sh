@@ -1,21 +1,14 @@
 #!/bin/bash
 
-rm extdata/precept2.zip
-rm extdata/precept3.zip
-rm extdata/precept4.zip
-rm extdata/precept5.zip
-rm extdata/precept6.zip
-rm extdata/precept7.zip
-rm extdata/precept8.zip
-rm extdata/precept9.zip
+rm extdata/*
 
-zip -r --exclude=*.DS_Store* extdata/precept1.zip precept1
-zip -r --exclude=*.DS_Store* extdata/precept2.zip precept2
-zip -r --exclude=*.DS_Store* extdata/precept3.zip precept3
-zip -r --exclude=*.DS_Store* extdata/precept4.zip precept4
-zip -r --exclude=*.DS_Store* extdata/precept5.zip precept5
-zip -r --exclude=*.DS_Store* extdata/precept6.zip precept6
-zip -r --exclude=*.DS_Store* extdata/precept7.zip precept7
-zip -r --exclude=*.DS_Store* extdata/precept8.zip precept8
-zip -r --exclude=*.DS_Store* extdata/precept9.zip precept9
+zip -r --exclude=*.DS_Store* extdata/handout1.zip handout1
+zip -r --exclude=*.DS_Store* extdata/handout2.zip handout2
+zip -r --exclude=*.DS_Store* extdata/handout3.zip handout3
+zip -r --exclude=*.DS_Store* extdata/handout4.zip handout4
+zip -r --exclude=*.DS_Store* extdata/handout5.zip handout5
+zip -r --exclude=*.DS_Store* extdata/handout6.zip handout6
+zip -r --exclude=*.DS_Store* extdata/handout7.zip handout7
+zip -r --exclude=*.DS_Store* extdata/handout8.zip handout8
+zip -r --exclude=*.DS_Store* extdata/handout9.zip handout9
 

@@ -1,54 +1,54 @@
-#' pol345.student
+#' The pol345.student Package
 #'
-#' This package contains precept materials for
+#' This package contains handouts for
 #' Marc Ratkowic's version of POL 345.
 #'
-#' @section Unpacking Precept Materials:
+#' @section Unpacking Handout Materials:
 #'
-#' Use \code{\link{get_precept}}, with a number to unpzck precept materials
+#' Use \code{\link{get_handout}}, with a number to unpack handout materials
 #' in a local directory.  For example:
 #'
-#' \code{get_precept(2)}
+#' \code{get_handout(2)}
 #'
-#' This will unpack the second precept materials into a folder called
-#' 'precept2` in your current working directory.
+#' This will unpack the second handout materials into a folder called
+#' 'handout2` in your current working directory.
 #' (Type \code{\link{getwd}} if you're
 #' not sure where that is.  You can change it using \code{\link{setwd}} or
 #' through the graphical user interface).
 #'
 #' @section Starting Again:
-#' If you want to start again on the same precept, you'll can unpack the
-#' precept materials again under a different name (\code{\link{get_precept}} won't
+#' If you want to start again on the same handout, you'll can unpack the
+#' handout materials again under a different name (\code{\link{get_handout}} won't
 #' overwrite an existing folder.)  To do this use the
 #' \code{newname} argument.  If you want your new copy to be called
-#' 'precept2-forreal', then use
+#' 'handout2-forreal', then use
 #'
-#' \code{get_precept(2, newname = "precept2-forreal")}
+#' \code{get_handout(2, newname = "handout2-forreal")}
 #'
 #' Provided there's not already a folder of that name in your
-#' current working directory, you'll get a fresh set of precept materials
+#' current working directory, you'll get a fresh set of handout materials
 #' unpacked there.
 #'
-#' If you want to preview the questions in a precept materials without
-#' unpacking it into your local file system, use \code{\link{preview_precept}}.
+#' If you want to preview the questions in a handout materials without
+#' unpacking it into your local file system, use \code{\link{preview_handout}}.
 #'
 #' @docType package
 #' @name pol345.student
 NULL
 
-get_precept_by_number <- function(num){
-  system.file(file.path("extdata", paste0("precept", num, ".zip")),
+get_handout_by_number <- function(num){
+  system.file(file.path("extdata", paste0("handout", num, ".zip")),
               package = "pol345.student")
 }
 
-#' Unpack Precept Materials by Number
+#' Unpack Handout Materials by Number
 #'
-#' This function finds a precept materials by its number,
+#' This function finds a handout materials by its number,
 #' unpacks it into your current working directory, and
 #' provides some hints to get going.
 #'
-#' By default the precept materials will unpack into a folder called, e.g.
-#' 'precept7' if 7 is the number you provided.
+#' By default the handout materials will unpack into a folder called, e.g.
+#' 'handout7' if 7 is the number you provided.
 #'
 #' If you'd prefer to unpack the materials under a different name, perhaps
 #' because you've decided to start fresh, or because for whatever reason there's
@@ -56,17 +56,17 @@ get_precept_by_number <- function(num){
 #' \code{newname} argument to asign a new one.  (Note that this only renames the
 #' top folder. The contents are keep their original names.)
 #'
-#' @param pnum Number of precept
-#' @param newname Your preferred name for the unpacked precept materials.
+#' @param pnum Number of handout
+#' @param newname Your preferred name for the unpacked handout materials.
 #'                (Default: NULL)
-#' @seealso \code{\link{preview_precept}} to see precept without
+#' @seealso \code{\link{preview_handout}} to see handout without
 #'          unpacking anything.
 #' @export
-get_precept <- function(pnum, newname = NULL){
-  f <- get_precept_by_number(pnum)
+get_handout <- function(pnum, newname = NULL){
+  f <- get_handout_by_number(pnum)
   if (f == "")
-    stop("There is no precept numbered '", pnum, "'")
-  pname <- paste0("precept", pnum)
+    stop("There is no handout numbered '", pnum, "'")
+  pname <- paste0("handout", pnum)
 
   # f is the zip file
   temp <- ".unpacking_psets"
@@ -103,7 +103,7 @@ get_precept <- function(pnum, newname = NULL){
   if (dir.exists(temp))
     unlink(temp, recursive = TRUE) # bye
 
-  cli::cat_line("Hint: To start working on this precept", col = "darkgray")
+  cli::cat_line("Hint: To start working on this handout", col = "darkgray")
   cli::cat_line("")
   cli::cat_bullet('setwd("', dname, '")',
                   col = "darkgray", bullet_col = "grey", bullet = "pointer")
@@ -123,20 +123,20 @@ get_precept <- function(pnum, newname = NULL){
   }
 }
 
-#' Preview Precept Materials
+#' Preview Handout Materials
 #'
-#' Launches the pdf viewer to show the questions in some precept materials.
+#' Launches the pdf viewer to show the questions in some handout materials.
 #'
-#' @param pnum Precept number
+#' @param pnum handout number
 #'
 #' @return Nothing.
 #' @export
 #'
-preview_precept <- function(pnum){
-  f <- get_precept_by_number(pnum)
+preview_handout <- function(pnum){
+  f <- get_handout_by_number(pnum)
   if (f == "")
-    stop("There is no precept numbered '", pnum, "'")
-  pname <- paste0("precept", pnum)
+    stop("There is no handout numbered '", pnum, "'")
+  pname <- paste0("handout", pnum)
 
   tmp <- tempdir()
   utils::unzip(f, exdir = tmp)
