@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Preview Precept Materials — preview_precept • pol345.student</title>
+<title>Unpack Handout Materials by Number — get_handout • pol345.student</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="Preview Precept Materials — preview_precept" />
+<meta property="og:title" content="Unpack Handout Materials by Number — get_handout" />
 
-<meta property="og:description" content="Launches the pdf viewer to show the questions in some precept materials." />
+<meta property="og:description" content="This function finds a handout materials by its number,
+unpacks it into your current working directory, and
+provides some hints to get going." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -61,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pol345.student</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.2</span>
       </span>
     </div>
 
@@ -97,31 +99,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Preview Precept Materials</h1>
+    <h1>Unpack Handout Materials by Number</h1>
     <small class="dont-index">Source: <a href='https://github.com/conjugateprior/pol345.student/blob/master/R/functions.R'><code>R/functions.R</code></a></small>
-    <div class="hidden name"><code>preview_precept.Rd</code></div>
+    <div class="hidden name"><code>get_handout.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Launches the pdf viewer to show the questions in some precept materials.</p>
+    <p>This function finds a handout materials by its number,
+unpacks it into your current working directory, and
+provides some hints to get going.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>preview_precept</span>(<span class='no'>pnum</span>)</pre>
+    <pre class="usage"><span class='fu'>get_handout</span>(<span class='no'>pnum</span>, <span class='kw'>newname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pnum</th>
-      <td><p>Precept number</p></td>
+      <td><p>Number of handout</p></td>
+    </tr>
+    <tr>
+      <th>newname</th>
+      <td><p>Your preferred name for the unpacked handout materials.
+(Default: NULL)</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Nothing.</p>
+    <p>By default the handout materials will unpack into a folder called, e.g.
+'handout7' if 7 is the number you provided.</p>
+<p>If you'd prefer to unpack the materials under a different name, perhaps
+because you've decided to start fresh, or because for whatever reason there's
+already a folder with that name where you want to unpack it, use the
+<code>newname</code> argument to asign a new one.  (Note that this only renames the
+top folder. The contents are keep their original names.)</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='preview_handout.html'>preview_handout</a></code> to see handout without
+         unpacking anything.</p></div>
     
 
   </div>
@@ -130,7 +150,9 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>
