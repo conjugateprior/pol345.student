@@ -8,7 +8,11 @@ bibliography: bib/handout9.bib
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(comment = "")
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = "")
+knit_engines$set(text = function(options) {
+  if (options$echo && options$eval) knit_child(text = options$code)
+})
 ```
 
 In this handout, we are going to revisit the Reinhart and Rogoff data. 
@@ -254,7 +258,8 @@ In these problems, you are going to continue the analysis from above.
 
 One observation has a value of `dRGDP` greater than 25!  Find this 
 observation, and explain why the value is so high.
-```
+
+```{text}
 
 ```
 
@@ -270,7 +275,8 @@ accounting for the confounding of previous debt-to-GDP.
 Taken together, what 
 do these two figures suggest about the causal relationship between debt-to-GDP 
 and growth?
-```
+
+```{text}
 
 ```
 
@@ -306,7 +312,7 @@ When they finish, the audience turns and looks to you.  What do you say?
 claim Absolute Correctness on this issue.  If you disagree, feel free, and 
 back it up however you wish---using this data, other citations, whatever works for you.)
 
-```
+```{text}
 
 ```
 

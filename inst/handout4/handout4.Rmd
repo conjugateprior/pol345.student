@@ -8,7 +8,11 @@ bibliography: bib/handout4.bib
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(comment = "")
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = "")
+knit_engines$set(text = function(options) {
+  if (options$echo && options$eval) knit_child(text = options$code)
+})
 ```
 
 In this handout, we will learn how to calculate correlations, plot points of 
@@ -344,7 +348,7 @@ What is the difference in slopes between the lines in the left and right figures
 in the example (oin the secton above)? In the left and right hand figures 
 from Question 1?
 
-```
+```{text}
 
 ```
 
@@ -363,7 +367,7 @@ Please keep in mind, there is no right answer to this question, just well-reason
 and less well-reasoned responses.  Also, this is a tricky question to reason 
 through.  Give it a shot.
 
-```
+```{text}
 
 ```
 

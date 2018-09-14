@@ -7,7 +7,11 @@ output:
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(comment = "")
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = "")
+knit_engines$set(text = function(options) {
+  if (options$echo && options$eval) knit_child(text = options$code)
+})
 ```
 
 In this handout, we will learn how to calculate a single loop.  In the next 
@@ -330,7 +334,8 @@ formatted.
 ### Question 3
 
 Does splitting by gender or region give any insight?
-```
+
+```{text}
 
 ```
 

@@ -8,7 +8,11 @@ bibliography: bib/handout8.bib
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(comment = "")
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = "")
+knit_engines$set(text = function(options) {
+  if (options$echo && options$eval) knit_child(text = options$code)
+})
 ```
 
 In this handout, we will learn how to test difference-in-means using the function 
@@ -293,7 +297,8 @@ labels, and a legend.  Please note that the `legend` command takes options
 Which countries are driving the negative correlation between oil and female 
 labor force participation?  What does this imply for Ross's claim that 
 oil, not Islam, is leading to a decrease in labor force participation?
-```
+
+```{text}
 
 ```
 
@@ -315,7 +320,7 @@ This figure indicates a clear
 interaction between proportion Muslim, oil, and Middle Eastern countries. 
 Please explain where we see a relationship between proportion Muslim and female labor participation, and where we do not.
 
-```
+```{text}
 
 ```
 

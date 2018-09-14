@@ -8,7 +8,11 @@ bibliography: bib/handout7.bib
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(comment = "")
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = "")
+knit_engines$set(text = function(options) {
+  if (options$echo && options$eval) knit_child(text = options$code)
+})
 ```
 
 In this handout, we will learn how to test difference-in-means using the function 
@@ -192,7 +196,8 @@ Construct a 95% and confidence interval.  What is the confidence interval tellin
 ### Question 3
 
 Can we interpret the effect in a causal fashion?  Why or why not?
-```
+
+```{text}
 
 ```
 
@@ -238,19 +243,22 @@ What percentage of your p-values are below 0.05?
 
 ```
 What percentage would you expect by chance?
-```
+
+```{text}
 
 ```
 
 Being less-than-scrupulous, you assert that you have found significant results - 
 lots of them!  Why should your customers be wary of the claim that mailings 
 have an impact?  
-```
+
+```{text}
 
 ```
 
 Explain why this process is termed 'data-fishing' and why it is frowned upon.
-```
+
+```{text}
 
 ```
 

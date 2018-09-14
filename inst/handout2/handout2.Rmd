@@ -9,7 +9,11 @@ bibliography: bib/handout2.bib
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(comment = "")
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = "")
+knit_engines$set(text = function(options) {
+  if (options$echo && options$eval) knit_child(text = options$code)
+})
 ```
 
 In this handout, we will learn how to subset data, a crucial step in adjusting
@@ -616,7 +620,7 @@ or zero values of `oil`)
 Just from looking at the means, does it appear that higher female labor force participation is associated with higher or lower levels of Islam?  Oil?
 Is this result causal?  Why or why not?
 
-```
+```{text}
 
 ```
 
@@ -636,7 +640,7 @@ Now for countries with high and low levels of oil but
 
 How does the relationship between oil and female labor participation vary between countries with a high and low level of Islam?
 
-```
+```{text}
 
 ```
 
@@ -666,7 +670,7 @@ In which subset of the data do we see a stronger relationship between Islam and
 female labor participation?  Explain why we are treating oil as a confounder, 
 and how we are attempting to control for it.
 
-```
+```{text}
 
 ```
 

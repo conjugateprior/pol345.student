@@ -8,7 +8,11 @@ bibliography: bib/handout1.bib
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(comment = "")
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = "")
+knit_engines$set(text = function(options) {
+  if (options$echo && options$eval) knit_child(text = options$code)
+})
 ```
 
 In this handout, we will learn the first steps of any data analysis: reading in the data and summarizing it.  Also, throughout the semester, we will be looking only at various subsets of the data.  We will learn here how to select data by the subset. 
@@ -300,7 +304,7 @@ What are the youngest and oldest ages?
 Assuming that NYC cops are arresting neither infants nor Yoda, what could be 
 going on here instead?
 
-```
+```{text}
 
 ```
 
@@ -323,13 +327,13 @@ Try the command `table(SAF$race)`.
 
 What do you think the command `table()` does?
 
-```
+```{text}
 
 ```
 
 What does the function `getwd` do?  When might this be helpful?
 
-```
+```{text}
 
 ```
 

@@ -8,7 +8,11 @@ bibliography: bib/handout3.bib
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(comment = "")
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = "")
+knit_engines$set(text = function(options) {
+  if (options$echo && options$eval) knit_child(text = options$code)
+})
 ```
 
 In this handout, we will learn how to create box plots, as well as how to 
@@ -273,13 +277,14 @@ What is this difference in these two means?
 
 Does this difference seem substantively important?  (Hint: The difference 
 between Romney and Obama in the 2012 popular vote was 3.9 percent.)  
-```
+```{text}
 
 ```
 
 What does this difference imply for the ability of Presidents to buy votes 
 (if it is interpreted as causal)?
-```
+
+```{text}
 
 ```
 
@@ -293,7 +298,8 @@ Now generate a table with two rows.  The first row should have the mean of
 Looking at the mean of `diff.vote`, one of the years clearly stands out as 
 an outlier.  What occurred in this election that may have affected `diff.vote`? 
 (Hint: Use Google or Wikipedia.)
-```
+
+```{text}
 
 ```
 
@@ -301,7 +307,8 @@ Looking at the mean of `relief`, one of the years clearly stands out as an
 outlier.  What occurred between 2000 and 2004 that may have affected this 
 variable?  Explain the nature and type of bias, and how this event may be 
 biasing the causal effect estimate of `relief` and `diff.vote`.
-```
+
+```{text}
 
 ```
 
@@ -314,7 +321,8 @@ Create a box plot of `all_current_irelief` by year. Next, construct a box plot
 Was there an event between 2000 and 2004 that affected both disaster relief 
 expenditures *and* support for President Bush?  How does this event cast 
 doubt on the causal claim the authors are attempting to make?
-```
+
+```{text}
 
 ```
 

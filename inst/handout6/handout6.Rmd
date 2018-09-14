@@ -8,7 +8,11 @@ bibliography: bib/handout6.bib
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(comment = "")
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = "")
+knit_engines$set(text = function(options) {
+  if (options$echo && options$eval) knit_child(text = options$code)
+})
 ```
 
 In this handout, we will learn how to calculate a single loop.  In the next week, 
@@ -461,7 +465,7 @@ normal approximation and the bootstrap.
 Why do they differ so much?  (Hint: Look at the density plots of `gdp2` versus 
 `log.gdp2`
 
-```
+```{text}
 
 ```
 
@@ -473,7 +477,8 @@ Create a new chance model, `lm(Data.gdp$gdp2 ~ Data.gdp$north.america)`
 ```
 
 What does each coefficient represent?
-```
+
+```{text}
 
 ```
 
