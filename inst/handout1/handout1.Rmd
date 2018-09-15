@@ -10,9 +10,6 @@ bibliography: bib/handout1.bib
 ```{r include = FALSE}
 library(knitr)
 opts_chunk$set(echo = TRUE, comment = "")
-knit_engines$set(text = function(options) {
-  if (options$echo && options$eval) knit_child(text = options$code)
-})
 ```
 
 In this handout, we will learn the first steps of any data analysis: reading in the data and summarizing it.  Also, throughout the semester, we will be looking only at various subsets of the data.  We will learn here how to select data by the subset. 
@@ -147,10 +144,10 @@ The data contains the following variables:
  `incum_vote`            The percent of the vote received by the incumbent's 
                          party for that county in that election. 
 
-  `prev_incum`           The percent of the vote received by the incumbent's 
+ `prev_incum`            The percent of the vote received by the incumbent's 
                          party in the previous election.
                       
-  `all_current_irelief`  A measure of disaster aid relief received, per 
+ `all_current_irelief`   A measure of disaster aid relief received, per 
                          capita, in the county. 
 -----------------------------------------------------------------------------
 
@@ -255,7 +252,7 @@ and a history of all commands you've run in this session.  When you close
 RStudio, you will be asked if you want to save your work space.  
 In general, you will *not* want to.  We save scripts, not the work space.  
 (You can change the Preference settings inside RStudio if
-you decide you never want to save and and don't want to be asked again).
+you decide you never want to be asked).
 
 # Precept Questions
 
@@ -272,53 +269,78 @@ from the folder where this file is to the data is `data/saf_subset.tsv`.
 Please answer the following questions and submit your code following 
 the directions in the syllabus.
 
+### Question 1
+
 Read the data into a data frame named `SAF`.  
 ```{r s_read}
-
+## My code here!
 ```
+
+### Question 2
 
 How many rows and how many columns are in the subset of the data?
 ```{r s_rowscols}
 
 ```
 
+### Question 3
+
 What year is the data from?  
 ```{r s_year}
 
 ```
+
+### Question 4
 
 What is the earliest date for a stop?  
 ```{r s_earliest}
 
 ```
 
+### Question 5
+
 The latest?  
 ```{r s_latest}
 
 ```
 
+### Question 6
+
 What are the youngest and oldest ages?  
 ```{r s_youngold}
 
 ```
+
+### Question 7
+
 Assuming that NYC cops are arresting neither infants nor Yoda, what could be 
 going on here instead?
 
-```{text}
-
+```{asis}
+My explanation here
 ```
 
-Often times, when you use data for your research, variable names 
+Often, when you use data for your research, variable names 
 and descriptions will be found in a code book.  The code book for the full 
 data set can be found [here](http://www.nyclu.org/files/SQF_Codebook.pdf).  
+
+### Question 8
 
 How many different categories of race are considered?  
 ```{r s_racecats}
 
 ```
 
+### Question 9
+
 Is the mean statistic returned from `summary` useful in characterizing the
 "average race" of those stopped and frisked?
+
+```{asis}
+
+```
+
+### Question 10
 
 Try the command `table(SAF$race)`.  
 ```{r s_runtable}
@@ -327,13 +349,15 @@ Try the command `table(SAF$race)`.
 
 What do you think the command `table()` does?
 
-```{text}
+```{asis}
 
 ```
 
+### Question 11
+
 What does the function `getwd` do?  When might this be helpful?
 
-```{text}
+```{asis}
 
 ```
 
