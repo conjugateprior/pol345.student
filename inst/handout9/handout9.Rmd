@@ -3,16 +3,12 @@ title: "Handout 9"
 author: "Student von Student III"
 output:
   pdf_document: default
-  html_document: default
 bibliography: bib/handout9.bib
 ---
 
 ```{r include = FALSE}
 library(knitr)
 opts_chunk$set(echo = TRUE, comment = "")
-knit_engines$set(text = function(options) {
-  if (options$echo && options$eval) knit_child(text = options$code)
-})
 ```
 
 In this handout, we are going to revisit the Reinhart and Rogoff data. 
@@ -252,22 +248,24 @@ model as well, previous debt-to-GDP is not Granger causing current growth.
 
 ## Precept Problems
 
-In these problems, you are going to continue the analysis from above.
+In these problems, you are going to continue the analysis from above. (This 
+means the data is already loaded).
 
 ### Question 1
 
 One observation has a value of `dRGDP` greater than 25!  Find this 
 observation, and explain why the value is so high.
 
-```{text}
+```{asis}
 
 ```
 
-## Question 2
+### Question 2
 
 Next, revisit the conditional plot from the first part.  This time evaluate 
 whether previous GDP has a predictive effect on current debt-to-GDP, after 
 accounting for the confounding of previous debt-to-GDP.  
+
 ```{r}
 
 ```
@@ -276,22 +274,23 @@ Taken together, what
 do these two figures suggest about the causal relationship between debt-to-GDP 
 and growth?
 
-```{text}
+```{asis}
 
 ```
 
-## Question 3
+### Question 3
 
 Repeat the same set of regressions from the second part, but try to explain 
 current debt-to-GDP, instead of growth.  Please try it without fixed effects, 
 and then with different fixed effects specifications (country, year, 
 country and year).
+
 ```{r}
 
 ```
 
 
-## Question 4
+### Question 4
 
 Imagine you are at a conference with David Cameron, Angela Merkel, Barack Obama, 
 and Shinzo Abe.  (If you don't know who these people are, please look them up.) 
@@ -312,7 +311,7 @@ When they finish, the audience turns and looks to you.  What do you say?
 claim Absolute Correctness on this issue.  If you disagree, feel free, and 
 back it up however you wish---using this data, other citations, whatever works for you.)
 
-```{text}
+```{asis}
 
 ```
 

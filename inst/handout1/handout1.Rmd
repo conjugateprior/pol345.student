@@ -3,7 +3,6 @@ title: "Handout 1"
 author: "Student von Student III"
 output:
   pdf_document: default
-  html_document: default
 bibliography: bib/handout1.bib
 ---
 

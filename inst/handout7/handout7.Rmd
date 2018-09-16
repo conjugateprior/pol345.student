@@ -3,16 +3,12 @@ title: "Handout 7"
 author: "Student von Student III"
 output:
   pdf_document: default
-  html_document: default
 bibliography: bib/handout7.bib
 ---
 
 ```{r include = FALSE}
 library(knitr)
 opts_chunk$set(echo = TRUE, comment = "")
-knit_engines$set(text = function(options) {
-  if (options$echo && options$eval) knit_child(text = options$code)
-})
 ```
 
 In this handout, we will learn how to test difference-in-means using the function 
@@ -166,7 +162,7 @@ That said, is the effect causal?  As you may have guessed, no.  There are any
 number of other possible confounders and omitted variables.  We will start 
 discussing how to handle them in the next handout.
 
-# Problems
+# Precept Questions
 
 Recall @Gerber.etal2008a, the social pressure experiment which we discussed in class.  
 In this experiment, researchers administered sent one of four different postcards to 
@@ -181,15 +177,28 @@ In the `data` folder, you will find the file `social.txt`.
 
 ### Question 1
 
-Was the treatment effect positive or negative?  Was it statistically significant?  
+Load in the data.  Was the treatment effect positive or negative?  
+
 ```{r}
 
 ```
 
-### Question 2
+Was it statistically significant?  
 
-Construct a 95% and confidence interval.  What is the confidence interval telling us?
+```{asis}
+
+```
+
+### Question 3
+
+Construct a 95% and confidence interval.  
 ```{r}
+
+```
+
+What is the confidence interval telling us?
+
+```{asis}
 
 ```
 
@@ -197,7 +206,7 @@ Construct a 95% and confidence interval.  What is the confidence interval tellin
 
 Can we interpret the effect in a causal fashion?  Why or why not?
 
-```{text}
+```{asis}
 
 ```
 
@@ -234,6 +243,7 @@ hand on Gerber and Green's data, and do the following:
 For every possible combination of number of mailings (1, 2, 3), appeal (1, 2, 3), 
 and ward (2, 3,$...$, 30) calculate the treatment effect of receiving the 
 mailings and its $p$-value.   (Hint: this is a triple loop.)
+
 ```{r}
 
 ```
@@ -242,9 +252,10 @@ What percentage of your p-values are below 0.05?
 ```{r}
 
 ```
+
 What percentage would you expect by chance?
 
-```{text}
+```{r}
 
 ```
 
@@ -252,13 +263,13 @@ Being less-than-scrupulous, you assert that you have found significant results -
 lots of them!  Why should your customers be wary of the claim that mailings 
 have an impact?  
 
-```{text}
+```{asis}
 
 ```
 
 Explain why this process is termed 'data-fishing' and why it is frowned upon.
 
-```{text}
+```{asis}
 
 ```
 

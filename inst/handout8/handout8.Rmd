@@ -3,7 +3,6 @@ title: "Handout 8"
 author: "Student von Student III"
 output:
   pdf_document: default
-  html_document: default
 bibliography: bib/handout8.bib
 ---
 
@@ -277,10 +276,10 @@ coplot(log.dv ~ schooling | log.pop,
 
 From these figures, it appears that schooling is having an independent, additive effect on GDP.
 
-# Problems
+# Precept Questions
 
 We will revisit Mankiw's data next week.  For now, let's consider the Ross 
-data from the homework assignment.  Please hand in the two figures described below.
+data from the homework assignment.
 
 ### Question 1
 
@@ -290,6 +289,7 @@ Eastern countries red and non-Middle Eastern countries blue.  Plot
 countries with open dots.  Make sure to include a title, informative axis 
 labels, and a legend.  Please note that the `legend` command takes options 
 `pch` and `col` just like `plot` does.  
+
 ```{r}
 
 ```
@@ -298,7 +298,7 @@ Which countries are driving the negative correlation between oil and female
 labor force participation?  What does this imply for Ross's claim that 
 oil, not Islam, is leading to a decrease in labor force participation?
 
-```{text}
+```{asis}
 
 ```
 
@@ -320,7 +320,7 @@ This figure indicates a clear
 interaction between proportion Muslim, oil, and Middle Eastern countries. 
 Please explain where we see a relationship between proportion Muslim and female labor participation, and where we do not.
 
-```{text}
+```{asis}
 
 ```
 

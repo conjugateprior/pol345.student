@@ -3,16 +3,12 @@ title: "Handout 6"
 author: "Student von Student III"
 output:
   pdf_document: default
-  html_document: default
 bibliography: bib/handout6.bib
 ---
 
 ```{r include = FALSE}
 library(knitr)
 opts_chunk$set(echo = TRUE, comment = "")
-knit_engines$set(text = function(options) {
-  if (options$echo && options$eval) knit_child(text = options$code)
-})
 ```
 
 In this handout, we will learn how to calculate a single loop.  In the next week, 
@@ -448,7 +444,7 @@ until we find a strong result.  Given enough time in a dataset, we can find
 to discuss statistical significance, the idea of whether we can differentiate a 
 given effect from 0.
 
-# Precept Problems
+# Precept Questions
 
 Please note that *for this week only*, these problems will not be handed in.  
 Please hand in the code from the examples, and we will do the following questions 
@@ -458,6 +454,7 @@ in precept.
 
 Using the GDP data calculate the 95% Confidence Interval for `gdp2` using the 
 normal approximation and the bootstrap.  
+
 ```{r}
 
 ```
@@ -465,7 +462,7 @@ normal approximation and the bootstrap.
 Why do they differ so much?  (Hint: Look at the density plots of `gdp2` versus 
 `log.gdp2`
 
-```{text}
+```{asis}
 
 ```
 
@@ -478,7 +475,7 @@ Create a new chance model, `lm(Data.gdp$gdp2 ~ Data.gdp$north.america)`
 
 What does each coefficient represent?
 
-```{text}
+```{asis}
 
 ```
 
@@ -487,6 +484,7 @@ What does each coefficient represent?
 In the roll call data create a `for` loop that does the analysis for roll 
 call data, except for the last 8 Congresses.  (This will be a nested loop.) 
 The loop should produce a 4 x 2 figure of density plots, as in the example.
+
 ```{r}
 
 ```
@@ -495,6 +493,7 @@ The loop should produce a 4 x 2 figure of density plots, as in the example.
 
 Repeat the analysis, but only for 'close' votes, that is, votes for which the 
 percentage of Republicans voting for the bill ranged between 0.4 and 0.6.
+
 ```{r}
 
 ```
@@ -503,6 +502,7 @@ percentage of Republicans voting for the bill ranged between 0.4 and 0.6.
 
 In the Gerber and Green data what is the estimated effect of having been contacted 
 by phone?  
+
 ```{r}
 
 ```
@@ -511,9 +511,9 @@ by phone?
 ### Question 6
 
 Does the effect vary across whether the respondent voted in the past and the type of appeal they received?
+
 ```{r}
 
 ```
-
 
 # References
