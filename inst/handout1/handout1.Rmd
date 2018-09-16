@@ -165,7 +165,7 @@ When we read in a file we will follow a *three-step procedure*:
 This process will ensure that we have loaded in the data without error.  
 The structure is given below.
 
-### Reading in a tab-delimited `.tsv` file.
+### Reading in a tab-delimited `.tsv` or `.txt` file.
 
 ```{r }
 Data.disaster <- read.table("data/disasteraid.tsv", header = TRUE)
@@ -262,8 +262,8 @@ Concerns arose that blacks and Hispanics were being stopped at higher
 rates than whites. We are going to load in and look at some of the 
 stop-and-frisk data. The data is large, with 532,911 observations and 
 101 variables. We will be looking at a subset of this data. You will find 
-the data in the `data` folder. It is called `saf_subset.tsv`, so the path 
-from the folder where this file is to the data is `data/saf_subset.tsv`.  
+the data in the `data` folder. It is called `saf_subset.txt`, so the path 
+from the folder where this file is to the data is `data/saf_subset.txt`.  
 
 Please answer the following questions and submit your code following 
 the directions in the syllabus.
