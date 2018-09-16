@@ -18,3 +18,5 @@ the package from GitHub like this:
   answers!
 * Eventually we'll be replaced by a `learnr` based setup.  In the meantime,
   we're in regular `Rmd`.
+
+[![Travis-CI Build Status](https://travis-ci.org/conjugateprior/pol345.student.svg?branch=master)](https://travis-ci.org/conjugateprior/pol345.student)
