@@ -3,11 +3,11 @@ title: "Handout 5"
 author: "Student von Student III"
 output:
   pdf_document: default
-  html_document: default
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(comment = "")
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = "")
 ```
 
 In this handout, we will learn how to calculate a single loop.  In the next 
@@ -297,13 +297,11 @@ approximately 1970, Republicans are more interventionist when a co-partisan
 President is in office.  We see no similar effect for Democrats, at least in 
 this simple analysis.
 
-# Precept Problems
+# Precept Questions
 
 **Please note: loops commonly cause problems to students encountering them for 
 the first time.  If you are really struggling on these problems, put in a 
 genuine effort, then talk to your preceptor.  We can be flexible for this week.**
-
-## Practice With Loops
 
 ### Question 1
 
@@ -323,6 +321,7 @@ Repeat, but use Southerners and non-Southerners to split the data.
 Use dashed and solid red and blue lines to differentiate Southern and 
 non-Southern Democrats and Republicans.  Make sure the figure is properly 
 formatted.
+
 ```{r}
 
 ```
@@ -330,7 +329,8 @@ formatted.
 ### Question 3
 
 Does splitting by gender or region give any insight?
-```
+
+```{asis}
 
 ```
 

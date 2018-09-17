@@ -3,12 +3,12 @@ title: "Handout 4"
 author: "Student von Student III"
 output:
   pdf_document: default
-  html_document: default
 bibliography: bib/handout4.bib
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(comment = "")
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = "")
 ```
 
 In this handout, we will learn how to calculate correlations, plot points of 
@@ -316,7 +316,7 @@ slopes, we can deduce the following: for countries with growing debt levels,
 countries with higher previous growth rates are more sensitive to debt than 
 countries with low previous growth rates.  
 
-# Precept Problems
+# Precept Questions
 
 ### Question 1
 
@@ -344,13 +344,15 @@ What is the difference in slopes between the lines in the left and right figures
 in the example (oin the secton above)? In the left and right hand figures 
 from Question 1?
 
-```
+```{asis}
 
 ```
 
 ## Question 3
 
-Is the relationship between debt and GDP more sensitive to changes in previous growth    rates (in the section above) of previous shifts in the debt ratio (Question 1)?  
+Is the relationship between debt and GDP more sensitive to changes in 
+previous growth rates (in the section above) of previous shifts in the 
+debt ratio (Question 1)?  
 
 Does this suggest
 
@@ -363,7 +365,7 @@ Please keep in mind, there is no right answer to this question, just well-reason
 and less well-reasoned responses.  Also, this is a tricky question to reason 
 through.  Give it a shot.
 
-```
+```{asis}
 
 ```
 

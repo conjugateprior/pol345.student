@@ -3,13 +3,12 @@ title: "Handout 2"
 author: "Student von Student III"
 output:
   pdf_document: default
-  html_document: default
-substitle: Subsetting and Density Plots
 bibliography: bib/handout2.bib
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(comment = "")
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = "")
 ```
 
 In this handout, we will learn how to subset data, a crucial step in adjusting
@@ -134,10 +133,10 @@ Everything looks fine, so let's look at the distribution of age ranges.
 table(Data.SAF$age)
 ```
 
-Now, 999 is commonly used to denote missing data.  If 999 were a marker for missing 
-data here, we would expect to see a top age of somewhere in the 90's, and then a 
-big gap between the highest age and 999.  That is not the case here.  But we do see 
-people recorded at 230, 245, 347, and 396 years old.
+Now, 999 is commonly used to denote missing data.  If 999 were a marker for 
+missing  data here, we would expect to see a top age of somewhere in the 90's, 
+and then a big gap between the highest age and 999.  That is not the case 
+here.  But we do see people recorded at 230, 245, 347, and 396 years old.
 
 ### Numeric Variables
 
@@ -591,10 +590,13 @@ for that variable, and observations with a negative value are below the mean of
 that variable. We will discuss this more in lecture, but researchers will 
 occasionally standardize the data this way to put variables 'on the same scale'.
 
-## Questions
+# Precept Questions
 
-We will start by looking at mean differences in femlabor in different subsets of
+We will start by looking at mean differences in `femlabor` in different s
+ubsets of
 the data. 
+
+### Question 1
 
 First calculate the difference-in-means for `femlabor` 
 between countries with high and low levels of Islam (i.e. between countries 
@@ -604,6 +606,7 @@ with positive and negative or zero values of `islam`)
 
 ```
 
+### Question 2
 
 Now calculate the difference-in-means for `femlabor` between countries with 
 high and low levels of oil  (i.e. between countries with positive and negative 
@@ -613,12 +616,16 @@ or zero values of `oil`)
 
 ```
 
+### Question 2
+
 Just from looking at the means, does it appear that higher female labor force participation is associated with higher or lower levels of Islam?  Oil?
 Is this result causal?  Why or why not?
 
-```
+```{asis}
 
 ```
+
+### Question 3
 
 Now calculate the difference-in-means for `femlabor` between countries with 
 high and low levels of oil *only for countries with a **high** level of Islam*
@@ -627,6 +634,8 @@ high and low levels of oil *only for countries with a **high** level of Islam*
 
 ```
 
+### Question 4
+
 Now for countries with high and low levels of oil but 
 *only for countries with a **low** level of Islam*
 
@@ -634,11 +643,15 @@ Now for countries with high and low levels of oil but
 
 ```
 
+### Question 5
+
 How does the relationship between oil and female labor participation vary between countries with a high and low level of Islam?
 
-```
+```{asis}
 
 ```
+
+### Question 6
 
 Next, we are going to create two figures and analyze the results.
 
@@ -662,11 +675,13 @@ consider countries with a **high** level of oil rents.
 
 Save the figures as two separate PDFs.
 
+### Question 7
+
 In which subset of the data do we see a stronger relationship between Islam and 
 female labor participation?  Explain why we are treating oil as a confounder, 
 and how we are attempting to control for it.
 
-```
+```{asis}
 
 ```
 

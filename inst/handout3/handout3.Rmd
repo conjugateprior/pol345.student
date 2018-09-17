@@ -8,7 +8,8 @@ bibliography: bib/handout3.bib
 ---
 
 ```{r include = FALSE}
-knitr::opts_chunk$set(comment = "")
+library(knitr)
+opts_chunk$set(echo = TRUE, comment = "")
 ```
 
 In this handout, we will learn how to create box plots, as well as how to 
@@ -202,7 +203,7 @@ in countries with low ethno-linguistic fractionalization (middle figure) than
 for countries with a high level of ethno-linguistic fractionalization 
 (rightmost figure).
 
-# Precept Problems
+# Precept Questions
 
 In these problems, we analyze the relationship between disaster relief aid and 
 support for the incumbent President's party, from 1988-2004.  Political 
@@ -244,13 +245,17 @@ next to this document. It contains the following variables:
                          in the county. 
 -----------------------------------------------------------------------------
 
+### Question 1
 
-We first create a variable, `relief`, that is the treatment variable. Create 
+Read in the data and create a variable, `relief`, that is the treatment 
+variable. Create 
 this variable such that it is 1 if  `all_current_irelief` is greater than 0, 
 and it is 0 if it is less or equal to 0.  
 ```{r}
 
 ```
+
+### Question 2
 
 Next, to measure the difference in support for the incumbent's party, 
 create a variable `diff.vote`, that is equal to the incumbent party candidate's 
@@ -259,6 +264,8 @@ current vote minus their previous vote.
 
 ```
 
+### Question 3
+
 Calculate the difference in means between `diff.vote` for those observations 
 for which `relief == 0` and `diff.vote` for those observations for which 
 `relief == 1`.  
@@ -266,22 +273,32 @@ for which `relief == 0` and `diff.vote` for those observations for which
 
 ```
 
+### Question 4
+
 What is this difference in these two means?
 ```{r}
 
 ```
 
+### Question 5
+
 Does this difference seem substantively important?  (Hint: The difference 
 between Romney and Obama in the 2012 popular vote was 3.9 percent.)  
-```
+
+```{asis}
 
 ```
+
+### Question 6
 
 What does this difference imply for the ability of Presidents to buy votes 
 (if it is interpreted as causal)?
-```
+
+```{asis}
 
 ```
+
+### Question 7
 
 Now generate a table with two rows.  The first row should have the mean of 
 `relief` by year and the second should have `diff.vote` by year.  
@@ -290,20 +307,28 @@ Now generate a table with two rows.  The first row should have the mean of
 
 ```
 
+### Question 8
+
 Looking at the mean of `diff.vote`, one of the years clearly stands out as 
 an outlier.  What occurred in this election that may have affected `diff.vote`? 
 (Hint: Use Google or Wikipedia.)
-```
+
+```{asis}
 
 ```
+
+### Question 9
 
 Looking at the mean of `relief`, one of the years clearly stands out as an 
 outlier.  What occurred between 2000 and 2004 that may have affected this 
 variable?  Explain the nature and type of bias, and how this event may be 
 biasing the causal effect estimate of `relief` and `diff.vote`.
-```
+
+```{asis}
 
 ```
+
+### Question 10
 
 Create a box plot of `all_current_irelief` by year. Next, construct a box plot 
 `diff.vote` by year.  
@@ -311,10 +336,13 @@ Create a box plot of `all_current_irelief` by year. Next, construct a box plot
 
 ```
 
+### Question 11
+
 Was there an event between 2000 and 2004 that affected both disaster relief 
 expenditures *and* support for President Bush?  How does this event cast 
 doubt on the causal claim the authors are attempting to make?
-```
+
+```{asis}
 
 ```
 
