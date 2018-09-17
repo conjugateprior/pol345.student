@@ -7,7 +7,7 @@ Authors@R: c(
 Description: This package allows students to unpack and view the 
              handouts and answer the questions before each precept in
              Princeton's Politics 345 class.
-Depends: R (>= 3.4)
+Depends: R (>= 3.3)
 Imports: cli
 RoxygenNote: 6.1.0
 Suggests: testthat,
