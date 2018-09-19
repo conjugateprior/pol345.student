@@ -37,3 +37,4 @@ test_that("in a directory with a handout already unpacked", {
   get_handout(3)
   expect_error(get_handout(3), "exists here already")
 })
+
