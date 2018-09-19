@@ -258,3 +258,39 @@ preview_handout <- function(pnum){
   else
     message("Sorry. There doesn't seem to be a preview available for that handout")
 }
+
+
+
+#' Rename File to Add Your netid
+#'
+#' This function takes the name of your compiled handout or precept
+#' document and prepends your netid. So if your netid was \code{lee89}
+#' and you had just made \code{handout3.pdf}, then
+#' \code{rename_for_upload("handout3.pdf")} would create a file called
+#' \code{lee89_handout3.pdf} which you could upload the Blackboard.
+#'
+#'
+#'
+#' Note: This function assumes that your username is also your netid.
+#' If this isn't true, don't use this function! Just rename the file
+#' by hand.
+#'
+#' @param fname A pdf file you want to upload to Blackboard
+#'
+#' @return Returns nothing, but does change the name of the file
+#' @export
+#'
+rename_for_upload <- function(fname){
+  if (file.exists(fname)){
+    newname <- paste0(Sys.getenv("USER"), "_", fname)
+    success <- file.rename(fname, newname)
+    if (!success)
+      stop("Boo. It looks like the operating system won't let you do this. Better do it manually.")
+  } else {
+    mess <- paste0("Is there really a file called ",
+                   fname, " in your current working directory (",
+                   getwd(), ")?")
+    stop(mess)
+  }
+}
+
