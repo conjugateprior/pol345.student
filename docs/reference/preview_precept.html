@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The pol345.student Package — pol345.student • pol345.student</title>
+<title>Preview Precept Materials — preview_precept • pol345.student</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,10 +30,9 @@
 
 
 
-<meta property="og:title" content="The pol345.student Package — pol345.student" />
+<meta property="og:title" content="Preview Precept Materials — preview_precept" />
 
-<meta property="og:description" content="This package contains handouts for
-Marc Ratkowic's version of POL 345." />
+<meta property="og:description" content="Launches the pdf viewer to show the questions in some precept materials." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -98,55 +97,40 @@ Marc Ratkowic's version of POL 345." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>The pol345.student Package</h1>
+    <h1>Preview Precept Materials</h1>
     <small class="dont-index">Source: <a href='https://github.com/conjugateprior/pol345.student/blob/master/R/functions.R'><code>R/functions.R</code></a></small>
-    <div class="hidden name"><code>pol345.student.Rd</code></div>
+    <div class="hidden name"><code>preview_precept.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This package contains handouts for
-Marc Ratkowic's version of POL 345.</p>
+    <p>Launches the pdf viewer to show the questions in some precept materials.</p>
     
     </div>
 
-        
-    <h2 class="hasAnchor" id="unpacking-handout-materials"><a class="anchor" href="#unpacking-handout-materials"></a>Unpacking Handout Materials</h2>
+    <pre class="usage"><span class='fu'>preview_precept</span>(<span class='no'>pnum</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>pnum</th>
+      <td><p>precept number</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-    <p>Use <code><a href='get_handout.html'>get_handout</a></code>, with a number to unpack handout materials
-in a local directory.  For example:</p>
-<p><code><a href='get_handout.html'>get_handout(2)</a></code></p>
-<p>This will unpack the second handout materials into a folder called
-'handout2` in your current working directory.
-(Type <code>getwd</code> if you're
-not sure where that is.  You can change it using <code>setwd</code> or
-through the graphical user interface).</p>
-    
-    <h2 class="hasAnchor" id="starting-again"><a class="anchor" href="#starting-again"></a>Starting Again</h2>
-
-    
-    <p>If you want to start again on the same handout, you'll can unpack the
-handout materials again under a different name (<code><a href='get_handout.html'>get_handout</a></code> won't
-overwrite an existing folder.)  To do this use the
-<code>newname</code> argument.  If you want your new copy to be called
-'handout2-forreal', then use</p>
-<p><code><a href='get_handout.html'>get_handout(2, newname = "handout2-forreal")</a></code></p>
-<p>Provided there's not already a folder of that name in your
-current working directory, you'll get a fresh set of handout materials
-unpacked there.</p>
-<p>If you want to preview the questions in a handout materials without
-unpacking it into your local file system, use <code><a href='preview_handout.html'>preview_handout</a></code>.</p>
+    <p>Nothing.</p>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#unpacking-handout-materials">Unpacking Handout Materials</a></li>
-
-      <li><a href="#starting-again">Starting Again</a></li>
+      <li><a href="#value">Value</a></li>
           </ul>
 
   </div>
