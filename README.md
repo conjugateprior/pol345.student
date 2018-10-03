@@ -12,6 +12,14 @@ the package from GitHub like this:
 
     devtools::install_github("conjugateprior/pol345.student")
 
+## Updates
+
+Experimentally, the package can be updated while installed by calling 
+
+    update_package()
+    
+In case help caches get confused, restarting the R session may be required.
+
 ## Notes
 
 * This package contains all the questions, all the data, but none of the
