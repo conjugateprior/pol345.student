@@ -2,7 +2,7 @@
 
 `pol345.student` allows students to unpack and complete questions
 in the pre-precept handouts for Princeton University's course 
-Politics 345 (as run by Marc Ratkowic and Will Lowe in Fall 2018).
+Politics 345 (as run by Marc Ratkovic and Will Lowe in Fall 2018).
 
 ## Installation
 
