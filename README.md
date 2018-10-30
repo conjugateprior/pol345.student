@@ -27,4 +27,4 @@ In case help caches get confused, restarting the R session may be required.
 * Eventually we'll be replaced by a `learnr` based setup.  In the meantime,
   we're in regular `Rmd`.
 
-[![Travis-CI Build Status](https://travis-ci.org/conjugateprior/pol345.student.svg?branch=master)](https://travis-ci.org/conjugateprior/pol345.student)
+[![Travis-CI Build Status](https://travis-ci.org/conjugateprior/pol345.student.svg?branch=master)](https://travis-ci.org/conjugateprior/pol345.student) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/conjugateprior/pol345.student?branch=master&svg=true)](https://ci.appveyor.com/project/conjugateprior/pol345.student)
