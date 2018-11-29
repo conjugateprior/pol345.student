@@ -1,6 +1,6 @@
 Package: pol345.student
 Title: Handout Materials for Politics 345
-Version: 0.1.19
+Version: 0.1.20
 Authors@R: c(
   person("Will", "Lowe", email = "wlowe@princeton.edu", role = c("aut", "cre")), 
   person("Marc", "Ratkovic", email = "ratkovic@princeton.edu", role = "ctb"))
