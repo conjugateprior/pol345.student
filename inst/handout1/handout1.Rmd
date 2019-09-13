@@ -1,9 +1,9 @@
 ---
 title: "Handout 1"
-author: "Student von Student III"
-output:
-  pdf_document: default
+author: "Put your name here!"
+output: pdf_document
 bibliography: bib/handout1.bib
+fontfamily: charter
 ---
 
 ```{r include = FALSE}
@@ -32,7 +32,7 @@ In this handout, we will learn the first steps of any data analysis: reading in 
 - Using brackets with two arguments, `[row, column]` to recover elements 
   of a data frame
 
-**Before beginning this handout Do not forget to make a new folder for this assignment and set your working directory!**
+**Before beginning this handout Do not forget to set your working directory!**
 
 # Working with Vectors  
 
@@ -47,38 +47,17 @@ constructed in R from using the `c` function, which is used to *combine*
 objects into a single vector. We are going to create a set of vectors, 
 one for each column in Trende's figure.
 ```{r }
-actual.2008 <- c(97677100, 16564353, 11174365, 2629262, 3418041)
-projected.2012 <- c(99139605, 17455952, 13134504, 3300869, 3910201)
-actual.2012 <- c(93033145, 16797651, 12921270, 3230318, 2584254)
 
-difference <- actual.2012 - projected.2012
-difference
 ```
 
 We can recall any element of a vector by using brackets.
 ```{r }
-actual.2008[2]
-actual.2012[1] - projected.2012[1]
+
 ```
 R allows us to perform any number of operations on a vector:
 ```{r }
-length(actual.2008) # Number of elements in a vector
 
-mean(actual.2008) # Average of the elements
 
-median(actual.2008) # Middle element, when sorted
-
-min(actual.2008) # Smallest element
-
-max(actual.2008) # Largest element
-
-range(actual.2008) #Range of a vector
-
-sum(actual.2008) # Adds all of the numbers in a vector
-
-prod(actual.2008) # Multiplies all of the numbers in a vector
-
-log(actual.2008)
 ```
 
 
@@ -97,12 +76,7 @@ looking for.
 Next, we give names to a vector:
 
 ```{r }
-names(actual.2008) # No names yet
-names(actual.2008) <- c("White", "Black", "Hispanic", "Asian", "Other")
 
-actual.2008
-
-actual.2008["White"]
 ```
 
 # Example: Disaster Relief Aid and Support for the Incumbent President. 
@@ -168,17 +142,14 @@ The structure is given below.
 ### Reading in a tab-delimited `.tsv` or `.txt` file.
 
 ```{r }
-Data.disaster <- read.table("data/disasteraid.tsv", header = TRUE)
-head(Data.disaster)
-summary(Data.disaster)
+
+
 ```
 
 ### Reading in a comma-separated `.csv` file.
 
 ```{r }
-Data.disaster <- read.csv("data/disasteraid.csv", header = TRUE)
-head(Data.disaster)
-summary(Data.disaster)
+
 ```
 
 ## Notes
@@ -187,8 +158,7 @@ We set the parameter `header` to `TRUE` to let R know that the first row of
 the file should be used to name each column.  To see what happens if we 
 get this wrong, try
 ```{r }
-Data.disaster.wrong <- read.table("data/disasteraid.tsv") # Wrong!
-head(Data.disaster.wrong) 
+
 ```
 Notice how the first row of the data is the column names, while the 
 column names are simply `V1` through `V5`.  
@@ -206,31 +176,29 @@ observation.   Below are some basic operations on data frames.
 
 We can get the names of the columns of the data frames:
 ```{r }
-names(Data.disaster)
+
 ```
 
 The function `dim` returns a vector with two elements.  The first is the number of rows of a data frame, the second is the number of columns.
 ```{r }
-dim(Data.disaster)
+
 ```
 
 The functions `nrow` and `ncol` return the same information as `dim`.
 ```{r }
-nrow(Data.disaster)
-ncol(Data.disaster)
+
 ```
 
 We can extract columns of a data frame several different ways.  For 
 example, we can use `$` to extract the column directly by name and 
 work with it.
 ```{r }
-mean(Data.disaster$incum_vote)
+
 ```
 or we can also *take a copy* of the column and work with this new 
 variable
 ```{r }
-incum <- Data.disaster$incum_vote
-mean(incum)
+
 ```
 
 # The Structure of R
@@ -262,8 +230,8 @@ Concerns arose that blacks and Hispanics were being stopped at higher
 rates than whites. We are going to load in and look at some of the 
 stop-and-frisk data. The data is large, with 532,911 observations and 
 101 variables. We will be looking at a subset of this data. You will find 
-the data in the `data` folder. It is called `saf_subset.txt`, so the path 
-from the folder where this file is to the data is `data/saf_subset.txt`.  
+the data in the `data` folder. It is called `subset_saf.csv`, so the path 
+from the folder where this file is to the data is `data/subset_saf.csv`.  
 
 Please answer the following questions and submit your code following 
 the directions in the syllabus.
@@ -271,92 +239,78 @@ the directions in the syllabus.
 ### Question 1
 
 Read the data into a data frame named `SAF`.  
-```{r s_read}
-## My code here!
+```{r, solution = TRUE}
+
 ```
 
 ### Question 2
 
 How many rows and how many columns are in the subset of the data?
-```{r s_rowscols}
+```{r, solution = TRUE}
 
 ```
 
 ### Question 3
 
 What year is the data from?  
-```{r s_year}
+```{r, solution = TRUE}
 
 ```
 
 ### Question 4
 
-What is the earliest date for a stop?  
-```{r s_earliest}
+What are the youngest and oldest ages?  
+```{r, solution = TRUE}
 
 ```
 
 ### Question 5
 
-The latest?  
-```{r s_latest}
-
-```
-
-### Question 6
-
-What are the youngest and oldest ages?  
-```{r s_youngold}
-
-```
-
-### Question 7
-
 Assuming that NYC cops are arresting neither infants nor Yoda, what could be 
 going on here instead?
 
-```{asis}
-My explanation here
+```{asis, solution = TRUE}
+
 ```
 
 Often, when you use data for your research, variable names 
 and descriptions will be found in a code book.  The code book for the full 
 data set can be found [here](http://www.nyclu.org/files/SQF_Codebook.pdf).  
 
-### Question 8
+### Question 6
 
 How many different categories of race are considered?  
-```{r s_racecats}
+```{r, solution = TRUE}
 
 ```
 
-### Question 9
+### Question 7
 
 Is the mean statistic returned from `summary` useful in characterizing the
 "average race" of those stopped and frisked?
 
-```{asis}
+```{asis, solution = TRUE}
 
 ```
 
-### Question 10
+### Question 8
 
 Try the command `table(SAF$race)`.  
-```{r s_runtable}
+```{r, solution = TRUE}
 
 ```
 
 What do you think the command `table()` does?
 
-```{asis}
+```{asis, solution = TRUE}
 
 ```
 
-### Question 11
+### Question 9
 
 What does the function `getwd` do?  When might this be helpful?
 
-```{asis}
+```{asis, solution = TRUE}
 
 ```
 
