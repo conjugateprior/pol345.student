@@ -128,13 +128,15 @@ ascertain which is most consistent with the data.  Let's first read in the
 data.
 
 ```{r}
-
+RR <- read.csv("data/RR.lags.csv", header = TRUE)
+head(RR)
+attach(RR)
 ```
 
 Next, we are going to look at a conditional plot.
 
 ```{r}
-
+coplot(dRGDP ~ lag.debtgdp1 | lag.dRGDP1)
 ```
 
 (You can ignore the line `missing.rows`.  It is telling you that there is 
@@ -147,7 +149,9 @@ a smooth curve to each panel, showing if there is any relationship between the
 variables in that panel.  We do this with
 
 ```{r}
-
+coplot(dRGDP ~ lag.debtgdp1 | lag.dRGDP1, 
+       panel = panel.smooth, number = 4, 
+       rows = 1, show.given = FALSE)
 ```
 
 Note the additions added into the call to `coplot`.  These are
@@ -179,17 +183,18 @@ with `lm`.  We are going to see, first, whether past values of growth and
 debt-to-GDP are predictive of current GDP growth.  We will do this through two 
 linear models:
 ```{r}
-
+lm1 <- lm(dRGDP ~ lag.dRGDP1 + lag.debtgdp1)
+lm2 <- lm(dRGDP ~ lag.dRGDP1 + lag.dRGDP2 + lag.debtgdp1 + lag.debtgdp2)
 ```
 
 To summarize these models, we can simply use `summary`. The results for the 
 first model are:
 ```{r}
-
+summary(lm1)
 ```
 and for the second model are:
 ```{r}
-
+summary(lm2)
 ```
 
 Let's focus in on `lm2`.  We have created a regression where we want to see 
@@ -225,7 +230,8 @@ for being that particular country.  For example, let's do the same analysis as
 above, but with fixed effects by country:
 
 ```{r}
-
+lm3 <- lm(dRGDP ~ lag.dRGDP1 + lag.debtgdp1 + factor(Country))
+summary(lm3)
 ```
 
 You will notice in the regression table that each country, except one, gets 

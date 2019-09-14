@@ -97,7 +97,9 @@ this causal question.
 
 First, we read in the data, and make sure we loaded it in properly. 
 ```{r }
-
+RR <- read.csv("data/RR.handout.csv")
+head(RR)
+summary(RR)
 ```
 
 ## Correlations and the Line of Best Fit
@@ -110,17 +112,17 @@ arguments `x` and `y`, as
 For example, if we wanted to know the correlation 
 between current change in GDP and the current debt ratio, we would use 
 ```{r }
-
+cor(RR$debtgdp, RR$dRGDP)
 ```
 which gives  a correlation of approximately -0.19.  So, current debt-to-GDP ratios and current 
 growth show a negative relationship.  We could also look at the correlation 
 between past and current debt-to-GDP ratios:
 ```{r }
-
+cor(RR$debtgdp, RR$lag.debtgdp)
 ```
 and growth:
 ```{r }
-
+cor(RR$dRGDP, RR$lag.dRGDP) 
 ```
 It appears that the debt-to-GDP ratio is highly *autocorrelated*. In other words, its past and current values correlate at a really high level.  The problem is less acute (though 
 still present) for growth rates.  
@@ -131,7 +133,7 @@ disentangle whether the causal effect is driven by the *current* levels or
 easy to confuse one effect with the other. One common way of reducing 
 autocorrelation is to take a "first difference":
 ```{r }
-
+cor(RR$debtgdp - RR$lag.debtgdp, RR$lag.debtgdp)
 ```
 The first difference of debt ratio (`RR$debtgdp - RR$lag.debtgdp`) correlates with 
 previous debt ratio at about $-0.24$, which is much less (in magnitude) than the original correlation of approximately $0.99$.  
@@ -154,7 +156,8 @@ $\widehat \beta$ such that the line is as close to the data as possible.
 For example, let's say we wanted to find the line of best fit from regressing GDP 
 growth on debt ratios.
 ```{r }
-
+lm1 <- lm(RR$dRGDP ~ RR$debtgdp)
+lm1
 ```
 where `lm1` is an object that contains all the information we need about the 
 linear regression.  According to our model, the estimated marginal effect of 
@@ -164,11 +167,16 @@ coefficient $\widehat \beta \approx -0.017$.
 If we wanted to access the coefficients from the regression, we can use them 
 directly within `lm1` object
 ```{r }
-
+lm1$coef # Both coefficients
+lm1$coef[1] # The intercept
+lm1$coef[2] # The slope
 ```
 or we could use the `coef` function to take a copy of the model coefficients
 ```{r }
-
+mycoefs <- coef(lm1) # Both coefficients
+mycoefs
+mycoefs[1] # The intercept
+mycoefs[2] # The slope
 ```
 
 # Adding a Regression Line and Coloring Points in a Figure
@@ -178,12 +186,17 @@ variable $x$ against a variable $y$.  We will then change the color and
 plotting character of subsets of the points,  and then add a regression line to 
 the figure.
 ```{r}
-
+plot(RR$debtgdp, RR$dRGDP, 
+     xlab = "Debt to GDP", ylab = "Change in GDP, %", 
+     main = "Debt-to-GDP Ratio versus Growth")
 ```
 Recall that we have the object `lm1` defined above. We can add this line to the 
 plot using the `abline` function
 ```{r}
-
+plot(RR$debtgdp, RR$dRGDP, 
+     xlab = "Debt to GDP", ylab = "Change in GDP, %", 
+     main = "Debt-to-GDP Ratio versus Growth")
+abline(lm1)
 ```
 
 ### Coding tip
@@ -200,13 +213,23 @@ order:
 Next, we are going to add some color to the figure.  We can do this by 
 specifying a color with `col`:
 ```{r}
-
+plot(RR$debtgdp, RR$dRGDP, 
+     xlab = "Debt to GDP", ylab = "Change in GDP, %", 
+     main = "Debt-to-GDP Ratio versus Growth", col = "red")
+abline(lm1)
 ```
 
 We can make the figure more interesting by giving different subsets of the data 
 their own color.
 ```{r}
+col.plot <- ifelse(RR$debtgdp > RR$lag.debtgdp, "red", "blue")
 
+plot(RR$debtgdp, RR$dRGDP, 
+     xlab = "Debt to GDP", ylab = "Change in GDP, %",
+     main = "Debt-to-GDP Ratio versus Growth", col = col.plot)
+abline(lm1)
+legend(c("topright"), c("Increasing Debt Ratio", "Decreasing Debt Ratio"), 
+       col = c( "red", "blue"), pch = 1)
 ```
 
 Notice that the legend took the option `pch`.  This command is short for 
@@ -225,7 +248,13 @@ a variable named `pch.plot` that takes on a value of 1 if previous growth
 is positive, and a 19 otherwise. We then pass that variable, `pch.plot` as the 
 value of `pch`: 
 ```{r}
+pch.plot <- ifelse(RR$lag.dRGDP > 0, 1, 19)
 
+plot(RR$debtgdp, RR$dRGDP, 
+     xlab = "Debt to GDP", ylab = "Change in GDP, %", 
+     main = "Debt-to-GDP Ratio versus Growth", pch = pch.plot)
+legend(c("topright"), c("Growing", "Not Growing"),  
+       pch = c(1, 19))
 ```
 
 # Debt and GDP: Exploring the Relationship
@@ -240,7 +269,21 @@ The two figures will plot
 
 The code is below.
 ```{r, fig.height = 5, fig.width = 9}
+par(mfrow = c(1, 2))
 
+growdebt1 <- (RR$debtgdp - RR$lag.debtgdp > 2) & (RR$lag.dRGDP > 2)
+plot(RR$debtgdp[growdebt1], RR$dRGDP[growdebt1], 
+     xlab = "Debt to GDP", ylab  =  "Change in GDP, %", 
+     main = "Debt-to-GDP Ratio versus Growth, \n High Growth", pch = 19, 
+     ylim = range(RR$dRGDP), xlim = range(RR$debtgdp))
+abline(lm(RR$dRGDP[growdebt1] ~ RR$debtgdp[growdebt1]))
+
+growdebt2 <- (RR$debtgdp - RR$lag.debtgdp > 2) & (RR$lag.dRGDP <= 2)
+plot(RR$debtgdp[growdebt2], RR$dRGDP[growdebt2], 
+     xlab = "Debt to GDP", ylab  =  "Change in GDP, %", 
+     main = "Debt-to-GDP Ratio versus Growth, \n Low Growth", pch = 19, 
+     ylim = range(RR$dRGDP), xlim = range(RR$debtgdp))
+abline(lm(RR$dRGDP[growdebt2] ~ RR$debtgdp[growdebt2]))
 ```
 
 

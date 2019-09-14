@@ -78,12 +78,19 @@ takes a value of 1 if the respondent felt that the Iraq War was a mistake, and a
 
 First, load and summarize the data:
 ```{r }
-
+load("data/iraq.RData")
+head(iraq)
+summary(iraq)
 ```
 To assess the difference-in-means, we are going to fit a linear model, and 
 look at it:
 ```{r }
+lm1 <- lm(mistake ~ female, data = iraq)
+lm1
 
+mean(iraq$mistake[iraq$female == 0]) # Intercept
+mean(iraq$mistake[iraq$female == 1]) - 
+  mean(iraq$mistake[iraq$female == 0]) # Coefficient
 ```
 We can interpret the first coefficient as the mean for males (`female == 0`), and 
 the second coefficient as the difference-in-means between females and males.  In 
@@ -93,7 +100,7 @@ Iraq War was a mistake.
 Is the effect statistically significant?  Let's use `summary` to return the 
 details from the `lm` object:
 ```{r }
-
+summary(lm1)
 ```
 We see that it is not.  The $p$-value, in the last column, is approximately 0.21, 
 which is not below the standard 5% threshold.   In other words, we cannot reject 
@@ -101,12 +108,19 @@ the null hypothesis that the difference between males and females is zero.
 
 `coef` allows you to access to the coefficients, standard errors, t-statistics, and p-values of the regression:
 ```{r }
-
+summary(lm1)$coef
 ```
 Then, if we wanted the coefficient and the  p-value for the effect due to 
 being female, we would use
 ```{r }
-
+# One coefficient
+summary(lm1)$coef[2,1]
+# p-value
+summary(lm1)$coef[2,4]
+# 95% Confidence interval
+mean.iraq <- summary(lm1)$coef[2,1] # Difference in means
+se.iraq <- summary(lm1)$coef[2,2] # Standard error
+c(mean.iraq - 1.96 * se.iraq, mean.iraq + 1.96 * se.iraq)
 ``` 
 
 # A Second Example: Growth During Wartime
@@ -130,11 +144,15 @@ variables:
 
 First, we read in the data.
 ```{r }
-
+load("data/growth.RData") 
+head(growth)
+summary(growth)
 ```
 To begin, we wish to consider the association between civil war and levels of economic development. As such, we wish to compare the GDP per capita between countries that experienced a war versus those that did not.  We would expect those countries that experience war to have levels of economic development (i.e. measured as GDP per capita) that are significantly lower than countries that do not experience war.  Due to the skew in the data, we must log GDP per capita.
 ```{r }
-
+growth$log.growth <- log(growth$gdppc) # Log data
+lm2 <- lm(log.growth ~ war, data = growth) # Estimate diff in means
+summary(lm2) 
 ```
 We observe that growth rates are lower by about $-0.67$ in countries at war 
 versus countries not at war.  The result is statistically significant, since 

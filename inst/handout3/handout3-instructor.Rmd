@@ -41,7 +41,9 @@ that are ethnically homogenous.
 
 First, we read in the data:
 ```{r }
-
+PeaceData <- read.table("data/PeaceData.txt", header = TRUE)
+head(PeaceData)
+summary(PeaceData)
 ```
 
 The data contains the following variables:
@@ -80,14 +82,25 @@ takes three arguments
 For example, if we wanted to calculate the mean duration to conflict by continent, 
 we could
 ```{r }
-
+tapply(PeaceData$ldur, INDEX = PeaceData$continent, FUN = mean)
 ```
 
 With even a modest number of groups, `tapply` can prove quite useful. 
 If we wanted the mean duration to conflict for each continent, for countries that 
 did and did not experience UN interventions, we would:
 ```{r }
+# Mean for countries w UN intervention
+inter1 <- tapply(PeaceData$ldur[PeaceData$UN == 1], 
+                 INDEX = PeaceData$continent[PeaceData$UN == 1], 
+                 FUN = mean)
+inter1
 
+# Mean for countries without a UN intervention
+inter0 <- tapply(PeaceData$ldur[PeaceData$UN == 0],
+                 INDEX = PeaceData$continent[PeaceData$UN == 0],  
+                 FUN = mean)
+inter0
+inter1 - inter0
 ```
 It appears that the UN did not intervene in any Asian country (as shown by the 
 `NA`  under Asia in the first row.  Also, it appears that UN intervention is 
@@ -99,7 +112,9 @@ We can put any function into `tapply` that we like: `sd`, `median`, and so on.
 `tapply` can also be used to calculate the number of observations in each 
 category, by setting `FUN = length`. For example
 ```{r }
-
+tapply(PeaceData$ldur, 
+       INDEX = PeaceData$continent, 
+       FUN = length)
 ```
 
 # Conditional Statements
@@ -117,14 +132,14 @@ for observations with high values of ethno-linguistic fractionalization, and a 0
 for observations with low values of ethno-linguistic fractionalization.  We 
 could do so using 
 ```{r }
-
+high.ethfrac <- ifelse(PeaceData$ethfrac > median(PeaceData$ethfrac), 1, 0)
 ```
 
 We have just created a variable, `high.ethfrac`, which takes on a value of 1 when 
 `ethfrac` is above its median, and 0 when `ethfrac` is below its median.  If 
 we look at this new variable
 ```{r }
-
+table(high.ethfrac)
 ```
 we can see that we do have, approximately, half 1's and half 0's.
 
@@ -134,21 +149,23 @@ R makes creating box-and-whisker plots straightforward.  The command is
 `boxplot`, and if we place a variable in the function, it returns a box 
 plot, as:
 ```{r}
-
+boxplot(PeaceData$ldur)
 ```
 
 The function `boxplot` can be used to construct separate boxes for each category 
 of a different variable.  For example, let's say we wanted to look at the box 
 plots for countries that did and did not experience a UN intervention:
 ```{r}
-
+boxplot(PeaceData$ldur ~ PeaceData$UN)
 ```
 
 It appears, from this simple box plot, that the UN interventions are associated with longer periods of peace. Just like with the density plots from the previous 
 handout, we can give the box plot a title and y-axis label, by setting the 
 `main` and  and `ylab` parameters to suitable values:
 ```{r}
-
+boxplot(PeaceData$ldur ~ PeaceData$continent, 
+        main = "Duration to Next Conflict, by Continent", 
+        ylab = "Duration to Next Conflict, logged" )
 ```
 
 # Placing Several Plots in One Figure
@@ -168,7 +185,14 @@ contains the same box plot for countries with a high level of ethno-linguistic
 fractionalization (`high.ethfrac == 1`), and the final contains the same box 
 plot but only when ethno-linguistic fractionalization is low (`high.ethfrac == 0`). 
 ```{r}
+par(mfrow = c(1, 3)) # One row, three columns
 
+boxplot(PeaceData$ldur ~ PeaceData$UN, 
+        main = "All", ylab = "Log Months To Next War")
+boxplot(PeaceData$ldur[high.ethfrac == 1] ~ PeaceData$UN[high.ethfrac == 1], 
+        main = "Low Ethnic Frac") # High ethfrac countries
+boxplot(PeaceData$ldur[high.ethfrac == 0] ~ PeaceData$UN[high.ethfrac == 0], 
+        main = "High Ethnic Frac") # Low ethfrac countries
 ```
 
 We can see from the data that UN interventions are associated with longer times 

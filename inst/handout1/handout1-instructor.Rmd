@@ -48,16 +48,40 @@ objects into a single vector. We are going to create a set of vectors,
 one for each column in Trende's figure.
 
 ```{r }
+actual.2008 <- c(97677100, 16564353, 11174365, 2629262, 3418041)
+projected.2012 <- c(99139605, 17455952, 13134504, 3300869, 3910201)
+actual.2012 <- c(93033145, 16797651, 12921270, 3230318, 2584254)
 
+difference <- actual.2012 - projected.2012
+difference
 ```
 
 We can recall any element of a vector by using brackets.
 ```{r }
-
+actual.2008[2]
+actual.2012[1] - projected.2012[1]
 ```
 R allows us to perform any number of operations on a vector:
 ```{r }
+length(actual.2008) # Number of elements in a vector
 
+mean(actual.2008) # Average of the elements
+
+median(actual.2008) # Middle element, when sorted
+
+min(actual.2008) # Smallest element
+
+max(actual.2008) # Largest element
+
+range(actual.2008) #Range of a vector
+
+sum(actual.2008) # Adds all of the numbers in a vector
+
+prod(actual.2008) # Multiplies all of the numbers in a vector
+
+log(actual.2008)
+
+unique(actual.2008) # How many distinct elements in a vector
 ```
 
 
@@ -76,7 +100,12 @@ looking for.
 Next, we give names to a vector:
 
 ```{r }
+names(actual.2008) # No names yet
+names(actual.2008) <- c("White", "Black", "Hispanic", "Asian", "Other")
 
+actual.2008
+
+actual.2008["White"]
 ```
 
 # Example: Disaster Relief Aid and Support for the Incumbent President. 
@@ -142,13 +171,17 @@ The structure is given below.
 ### Reading in a tab-delimited `.tsv` or `.txt` file.
 
 ```{r }
-
+Data.disaster <- read.table("data/disasteraid.tsv", header = TRUE)
+head(Data.disaster)
+summary(Data.disaster)
 ```
 
 ### Reading in a comma-separated `.csv` file.
 
 ```{r }
-
+Data.disaster <- read.csv("data/disasteraid.csv")
+head(Data.disaster)
+summary(Data.disaster)
 ```
 
 ## Notes
@@ -157,7 +190,8 @@ We set the parameter `header` to `TRUE` to let R know that the first row of
 the file should be used to name each column.  To see what happens if we 
 get this wrong, try
 ```{r }
-
+Data.disaster.wrong <- read.table("data/disasteraid.tsv") # Wrong!
+head(Data.disaster.wrong) 
 ```
 Notice how the first row of the data is the column names, while the 
 column names are simply `V1` through `V5`.  
@@ -175,29 +209,31 @@ observation.   Below are some basic operations on data frames.
 
 We can get the names of the columns of the data frames:
 ```{r }
-
+names(Data.disaster)
 ```
 
 The function `dim` returns a vector with two elements.  The first is the number of rows of a data frame, the second is the number of columns.
 ```{r }
-
+dim(Data.disaster)
 ```
 
 The functions `nrow` and `ncol` return the same information as `dim`.
 ```{r }
-
+nrow(Data.disaster)
+ncol(Data.disaster)
 ```
 
 We can extract columns of a data frame several different ways.  For 
 example, we can use `$` to extract the column directly by name and 
 work with it.
 ```{r }
-
+mean(Data.disaster$incum_vote)
 ```
 or we can also *take a copy* of the column and work with this new 
 variable
 ```{r }
-
+incum <- Data.disaster$incum_vote
+mean(incum)
 ```
 
 # The Structure of R

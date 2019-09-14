@@ -119,17 +119,18 @@ In order to learn how to select subsets of data, we are going to begin with
 subsetting a single vector.  When we *subset* a vector, we are looking only 
 at a portion of the vector that satisfies certain conditions.  To motivate this 
 example, we are going to consider the "Stop-and-Frisk" data [@Gelman.etal2007a]  
-that we used in the last session.  
+that we used in the last session.
 
 First, we are going to load in the data and make sure that it loaded properly.
 
 ```{r}
-
+Data.SAF <- read.csv("data/subset_saf.csv")
+head(Data.SAF)
 ```
 
 Everything looks fine, so let's look at the distribution of age ranges.
 ```{r}
-
+table(Data.SAF$age)
 ```
 
 Now, 999 is commonly used to denote missing data.  If 999 were a marker for 
@@ -144,7 +145,8 @@ limits.  In that case, we first want to create a variable that is a nominal
 variable, which R calls a `factor`.  To do this, first check the class of the 
 race variable.
 ```{r}
-
+class(Data.SAF$race)
+mean(Data.SAF$race)
 ```
 You will see that the race variable has a class of `integer`.  R interprets 
 variables with the class `numeric` and `integer` as quantitative variables. 
@@ -159,13 +161,16 @@ returns levels of 1, 2, 3, etc., these are interpreted as categories, and not
 numbers.  Let's look at an example, where we use the command `as.factor` to 
 create a version of race that is a factor:
 ```{r}
-
+Data.SAF$race2 <- as.factor(Data.SAF$race)
+head(Data.SAF)
 ```
 
 Notice how `race2` was appended to the last column of the data frame 
 `Data.SAF`.  To check the class of `race2`, we can do the following:
 ```{r}
-
+class(Data.SAF$race2)
+levels(Data.SAF$race2)
+# mean(Data.SAF$race2) # Run this line -- it returns an NA
 ```
 
 Notice that the mean of a factor is nonsensical; R returns `NA`.  The levels of 
@@ -173,7 +178,8 @@ the variable `race2` are names of each level. We can make these levels more
 informative using information from the code book, which can be found 
 [here](http://michael.hahsler.net/research/arules_RUG_2015/demo/SQF_Codebook.pdf).
 ```{r}
-
+levels(Data.SAF$race2) <- c("Bl", "Bl-Hs", "Wh-Hs", "Wh", "As", "Am In")
+head(Data.SAF)
 ```
 
 The variable `race2` now displays in a more informative manner.  We are using 
@@ -188,7 +194,8 @@ case, R is interpreting the variable as a string of text.  Variables in this for
 are most commonly used to label axes or figures, not for analysis.  To turn the
 variable `race2` into a character vector, use
 ```{r}
-
+char.race <- as.character(Data.SAF$race2)
+char.race[1:5] # Look at the first 5 elements
 ```
 The quotation marks indicate that the vector is being interpreted as a character.
 
@@ -213,26 +220,45 @@ saying what observations you want to look at.  To illustrate, we are first going
 to look at the distribution of stops-and-frisks (SAFs) by race, for the whole
 dataset:
 ```{r}
+table.all <- table(Data.SAF$race2)
+table.all
 
+table.all.dens <- table.all / length(Data.SAF$race2)
+table.all.dens
+
+barplot(table.all.dens)
 ```
 
 Dividing by the length of the `race2` puts the table on a *density scale*,
 because it converts the table's frequencies into proportions. This code was a
 bit long.  We can shorten it:
 ```{r}
-
+table.all <- table(Data.SAF$race2) / length(Data.SAF$race2)
+table.all
 ```
 Either version is fine to use.
 
 Now, let's say we wanted to calculate the distribution of race for people younger
 than 10 years old. A slightly longer version of the code is:
 ```{r}
+race2.10 <- Data.SAF$race2[Data.SAF$age < 10]
 
+table.10 <- table(race2.10)
+table.10
+
+table.10.dens <- table.10 / length(race2.10)
+table.10.dens
+
+barplot(table.10.dens)
 ```
 
 We could do the same a bit more concisely as:
 ```{r}
+table.10 <- table(Data.SAF$race2[Data.SAF$age < 10])
+table.10
 
+table.10.dens <- table.10 / length(Data.SAF$race2[Data.SAF$age < 10])
+table.10.dens
 ```
 Again, either version is fine.  We have found that as people get more familiar
 with R, their code grows more concise.
@@ -243,30 +269,58 @@ different ages:
 ### People older than 20 (`>`)
 
 ```{r}
+race2.g20 <- Data.SAF$race2[Data.SAF$age > 20]
+table.g20 <- table(race2.g20)
+table.g20
 
+table.g20.dens <- table.g20 / length(race2.g20)
+table.g20.dens
 ```
 
 ### For people exactly 1 year old (`==`)
 ```{r}
+race2.1 <- Data.SAF$race2[Data.SAF$age == 1]
+table.1 <- table(race2.1)
+table.1
 
+table.1.dens <- table.1 / length(race2.1)
+table.1.dens
 ```
 
 ### For people aged 10-19 (`>`, `<=`, and `&`)
 
 ```{r}
+race2.teen <- Data.SAF$race2[(Data.SAF$age > 9) & (Data.SAF$age <= 19)]
+table.teen <- table(race2.teen)
+table.teen
 
+table.teen.dens <- table.teen / length(race2.teen)
+table.teen.dens
 ```
 
 ### For people ages 20-29 but only in the morning  (`>`, `<=`, and `&`)
 
 ```{r}
+race2.20s.morn <- Data.SAF$race2[(Data.SAF$age > 19) &
+                                 (Data.SAF$age <= 29) &
+                                 (Data.SAF$timestop < 1200)]
+table.20s.morn <- table(race2.20s.morn)
+table.20s.morn
 
+table.20s.morn.dens <- table.20s.morn / length(race2.20s.morn)
+table.20s.morn.dens
 ```
 
 ### For people in the early morning *or* late evening, between 11pm and 3am (`>`, `<=`, and `|`)
 
 ```{r}
+race2.night <- Data.SAF$race2[(Data.SAF$timestop <= 300) |
+                              (Data.SAF$timestop >= 2300)]
+table.night <- table(race2.night)
+table.night
 
+table.night.dens <- table.night / length(race2.night)
+table.night.dens
 ```
 
 ## Subsetting a Data Frame
@@ -281,25 +335,27 @@ where the first argument in the brackets tells you what rows to consider and the
 second tells what columns.  At its simplest, if we wanted the third row of
 `Data.SAF`, we would use
 ```{r}
-
+Data.SAF[3, ]
 ```
 while if we wanted the value of the 12,234rd row and fifth column, we would use
 ```{r}
-
+Data.SAF[12234, 5]
 ```
 
 Often, we will want to subset an entire data frame.  As an example, let's say
 we wanted to consider the subset of `Data.SAF` for people with a reported
 age of 1.  In this case, we would subset the data as
 ```{r}
-
+Data.SAF.1 <- Data.SAF[Data.SAF$age == 1, ]
+head(Data.SAF.1)
 ```
 which is telling R to take all of the rows of `Data.SAF` for which `age == 1`
 (the first argument) and then return all columns (the second argument).
 
 Here's the first three columns:
 ```{r}
-
+Data.SAF.1 <- Data.SAF[Data.SAF$age == 1, 1:3]
+head(Data.SAF.1)
 ```
 
 # Density Plots
@@ -317,7 +373,7 @@ example from lecture.
 
 The basic syntax for producing a density plot in R is
 ```{r}
-
+plot(density(Data.SAF$timestop))
 ```
 
 Now, the way I teach plotting involves four steps:
@@ -335,7 +391,8 @@ We are now going to clean up the density plot above.
 The first thing that grabbed my eye was the main title.  The R function
 `plot` takes a parameter  `main` that allows you to set the title. Like this:
 ```{r}
-
+plot(density(Data.SAF$timestop), 
+     main = "Distribution of Stops-and-Frisks over Time")
 ```
 
 Note that `main` goes *outside* the parentheses for the `density` but *inside*
@@ -348,7 +405,9 @@ how `density` operates.
 If we wanted to change the y-axis label, we could use `ylab`, but the default
 setting "Density" will work fine here.  So, now our code looks like
 ```{r}
-
+plot(density(Data.SAF$timestop),
+     main = "Distribution of Stops-and-Frisks over Time",
+     xlab = "Time, 00:00-24:00")
 ```
 
 where I include the time range so the reader knows we are using military time.
@@ -360,7 +419,9 @@ goes over 2400 and below 0.  This does not make any sense. `density` takes an
 option `cut = 0` that cuts the density plot at the minimal and maximal values of
 `timestop`. Let's go ahead and do that.
 ```{r}
-
+plot(density(Data.SAF$timestop, cut = 0),
+     main = "Distribution of Stops-and-Frisks over Time",
+     xlab = "Time, 00:00-24:00")
 ```
 
 Notice how the `cut = 0` option is *inside* the `density`.
@@ -378,7 +439,11 @@ Specifically, we are going to place three densities on the same figure: one for
 Blacks, one for Whites, and one for White-Hispanics.   We are going to start
 with the following code:
 ```{r}
-
+plot(density(Data.SAF$timestop[Data.SAF$race2 == "Wh"], cut = 0),
+             main = "Distribution of Stops-and-Frisks over Time",
+             xlab = "Time, 00:00-24:00")
+lines(density(Data.SAF$timestop[Data.SAF$race2 == "Bl"], cut = 0))
+lines(density(Data.SAF$timestop[Data.SAF$race2 == "Wh-Hs"], cut = 0))
 ```
 
 `plot` opens and produces a single figure and `lines` places the density on an
@@ -393,7 +458,12 @@ call to `plot`, that for White people. So, we need to adjust the y-axis. We do
 this using `ylim = c(upper, lower)` where `upper` and `lower` give the desired
 upper and lower limits on the y-axis.  `ylim` is only in the call to `plot`.
 ```{r}
-
+plot(density(Data.SAF$timestop[Data.SAF$race2 == "Wh"], cut = 0),
+     main = "Distribution of Stops-and-Frisks over Time",
+     xlab = "Time, 00:00-24:00",
+     ylim = c(0, .0008))
+lines(density(Data.SAF$timestop[Data.SAF$race2 == "Bl"], cut = 0))
+lines(density(Data.SAF$timestop[Data.SAF$race2 == "Wh-Hs"], cut = 0))
 ```
 
 ### Adding Color to Differentiate Lines
@@ -403,7 +473,14 @@ each line its own color.  In R, the parameter `col` can be used either
 in `plot` or `lines`.  We can set color as follows:
 
 ```{r}
-
+plot(density(Data.SAF$timestop[Data.SAF$race2 == "Wh"], cut = 0),
+             main = "Distribution of Stops-and-Frisks over Time",
+             xlab = "Time, 00:00-24:00",
+             ylim = c(0, .0008), col = "blue")
+lines(density(Data.SAF$timestop[Data.SAF$race2 == "Bl"], cut = 0),
+      col = "red" )
+lines(density(Data.SAF$timestop[Data.SAF$race2 == "Wh-Hs"], cut = 0),
+      col = "brown" )
 ```
 
 ### Adding Vertical Lines
@@ -412,7 +489,17 @@ At this point, we are going to use the `abline` to add vertical lines at
 midnight, 6am, noon, and 6pm, just to help guide the reader's eye.
 
 ```{r}
-
+plot(density(Data.SAF$timestop[Data.SAF$race2 == "Wh"], cut = 0),
+     main = "Distribution of Stops-and-Frisks over Time",
+     xlab = "Time, 00:00-24:00",
+     ylim = c(0, .0008),
+     col = "blue" )
+lines(density(Data.SAF$timestop[Data.SAF$race2 == "Bl"], cut = 0),
+      col = "red")
+lines(density(Data.SAF$timestop[Data.SAF$race2 == "Wh-Hs"], cut = 0),
+      col = "brown" )
+abline(v = c(0,600, 1200, 1800, 2400),
+       lty = 2, col = "gray" )
 ```
 
 The `abline` function takes several arguments:
@@ -429,7 +516,20 @@ At this point, we can tell the difference between the densities, but the
 reader will have no idea as to which color denotes which race. Therefore,
 we need to add a legend:
 ```{r}
-
+plot(density( Data.SAF$timestop[Data.SAF$race2 == "Wh"], cut = 0),
+     main = "Distribution of Stops-and-Frisks over Time",
+     xlab = "Time, 00:00-24:00",
+     ylim = c(0, .0008),
+     col = "blue" )
+lines(density(Data.SAF$timestop[Data.SAF$race2 == "Bl"], cut = 0),
+      col = "red")
+lines(density(Data.SAF$timestop[Data.SAF$race2 == "Wh-Hs"], cut = 0),
+      col = "brown" )
+abline(v = c(0,600, 1200, 1800, 2400),
+       lty = 2, col = "gray" )
+legend("topleft", legend  = c("Blacks", "Whites", "Hispanics"),
+       col = c("red", "blue", "brown"),
+       lty = c(1,1,1))
 ```
 
 Note: Saving a figure in RStudio can be accomplished through clicking on "Export" on

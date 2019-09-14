@@ -111,7 +111,8 @@ In the `data` folder you will find the file `international_growth_data.csv`,
 which contains the data from the Mankiw, et al. study. First, we are going to 
 read it in, and take a look at what variables it contains
 ```{r }
-
+Data.Growth <- read.csv("data/international_growth_data.csv")
+names(Data.Growth)
 ```
 The Solow growth model makes some very specific predictions about the 
 relationships among these variables.  Specifically,
@@ -125,24 +126,37 @@ Therefore, in this example, we will need to log these variables. We can do
 this directly within the `lm` command.
 
 ```{r }
+lm1 <- lm(log(gdp_per_adult_1985) ~ log(investment_per_gdp / 100) +
+          log(working_age_pop_growth_1960to198 / 100 + .05), data = Data.Growth)
 
+summary(lm1)
 ```
 These names are too long, so let's clean them up through creating new 
 variables, instead of using `log` within the `lm` command:
 ```{r }
-
+log.dv <- log(Data.Growth$gdp_per_adult_1985)
+log.invest <- log(Data.Growth$investment_per_gdp / 100)
+log.pop <- log(Data.Growth$working_age_pop_growth_1960to198 / 100 + .05)
+lm1 <- lm(log.dv ~ log.invest + log.pop, data = Data.Growth)
 ```
 From looking at the output, the second coefficient is approximately $-0.5$, 
 as expected.  The first coefficient is not very close.  In fact, we can 
 calculate how far away it is:
 ```{r }
-
+summary(lm1)$coef
+beta <- summary(lm1)$coef[2,1]
+beta
+sigma <- summary(lm1)$coef[2,2]
+sigma
+(beta - 0.5) / sigma
 ```
 The estimate coefficient is about 6 standard deviations from the value predicted 
 by Solow's theory---a discrepancy not likely to occur due to chance (i.e., a 
 'significant difference').
 ```{r}
-
+plot(lm1$fit, lm1$res, 
+     main = "Fitted vs. Residual Plot",
+     xlab = "Fitted Values", ylab = "Residuals") 
 ```
 
 Simply by looking at the figure, there appears nothing wrong---no signs of 
@@ -160,7 +174,14 @@ residuals of non-OECD countries, we would argue that we need to add OECD to the
 regression.  We can assess this in the fitted-residual plot, by plotting OECD 
 countries with a solid dot and non-OECD countries with an open dot:
 ```{r}
-
+pch.oecd <- ifelse(Data.Growth$oecd, 19, 1)
+plot(lm1$fit, lm1$res, 
+     main = "Fitted vs. Residual Plot",
+     xlab = "Fitted Values", ylab = "Residuals", 
+     pch = pch.oecd) 
+legend(x = 6, y = 3,
+       legend = c("OECD", "Non-OECD"),
+       pch = c(19,1))
 ```
 
 Since the OECD countries seem to have residuals that are indistinguishable from 
@@ -169,7 +190,14 @@ Notice that `plot` takes the option `pch`, which stands for 'plotting character.
 If we wanted to use X's and O's instead of solid and open points, we could have 
 simply run
 ```{r }
-
+pch.oecd <- ifelse(Data.Growth$oecd, "O", "X")
+plot(lm1$fit, lm1$res, 
+     main = "Fitted vs. Residual Plot", 
+     xlab = "Fitted Values", ylab = "Residuals", 
+     pch = pch.oecd) 
+legend(x = 6, y = 3,
+       legend = c("OECD", "Non-OECD"),
+       pch = c("O","X"))
 ```
 
 which would return O's plotted for OECD countries and X's plotted for non-OECD 
@@ -181,12 +209,25 @@ blue dots for countries with low levels of schooling.  Finally, we are going to
 add lines at the mean residual for countries with high- and low-levels of 
 schooling:
 ```{r}
-
+pch.schooling <- ifelse(Data.Growth$schooling > 8, 19, 1)
+col.schooling <- ifelse(Data.Growth$schooling > 8, "red", "blue")
+plot(lm1$fit, lm1$res, 
+     main = "Fitted vs. Residual Plot", 
+     xlab = "Fitted Values", ylab = "Residuals", 
+     pch = pch.schooling, col = col.schooling) 
+abline(h = mean(lm1$res[Data.Growth$schooling > 8], na.rm = TRUE), col = "red")
+abline(h = mean(lm1$res[Data.Growth$schooling <= 8], na.rm = TRUE), lty = 2, col = "blue")
+legend(x = 6, y = 3,
+       legend = c("High Schooling", "Low Schooling"),
+       pch = c(19,1),
+       col = c("red","blue"))
 ```
 
 As suggested by the residual plot, we could add the variable `log.schooling` to our regression:
 ```{r }
-
+Data.Growth$log.schooling <- log(Data.Growth$schooling)
+lm2 <- lm(log.dv ~ log.invest + log.pop + log.schooling, data = Data.Growth)
+summary(lm2)
 ```
 and when we do so, as predicted by theory, we find that the first two 
 coefficients are far closer to their predicted values of 
@@ -210,7 +251,9 @@ A conditional plot produces a figure with several panels.  Each panel plots
 the dependent variable against an independent variable, within the range of a 
 *conditioning variable*.  This is perhaps better explained after you see one:
 ```{r}
-
+coplot(log.dv ~ schooling | log.invest,
+       data = Data.Growth,
+       rows = 1, columns = 4, number = 4)
 ```
 
 This figure shows GDP vs. schooling, for low levels of investment (left) 
@@ -225,7 +268,9 @@ have, the more subsets you can explore.
 Next, let's look at the same figure, except now we are going to use `log.pop` 
 as the conditioning variable:
 ```{r }
-
+coplot(log.dv ~ schooling | log.pop, 
+       data = Data.Growth,
+       rows = 1, columns = 4, number = 4)
 ```
 
 From these figures, it appears that schooling is having an independent, additive effect on GDP.

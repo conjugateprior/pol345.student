@@ -76,13 +76,16 @@ In the data folder you will find the file `GDPNorAm.csv`.  This file contains
 the World Bank), and an *indicator variable* that 
 takes on a value of 1 if the country is in North America.  
 ```{r }
-
+Data.gdp <- read.csv("data/GDP_NorAm_Partial.csv", header = TRUE)
+head(Data.gdp)
+summary(Data.gdp)
 ```
 Next, note that GDP is in dollars. Let's make a new variable that turns it 
 from dollars to billions of dollars. Then, let's add the logged value of 
 GDP:
 ```{r }
-
+Data.gdp$gdp2 <- Data.gdp$gdp / 1e9 # 1e9 returns a 1 with 9 zeroes, i.e., one billion
+Data.gdp$log.gdp2 <- log(Data.gdp$gdp2)
 ```
 Now that we have the data, let's fit a linear model (what FPP calls a 
 "chance model") to log GDP. The linear model will look like 
@@ -91,20 +94,24 @@ log.gdp2 = \beta_0 + \epsilon_i
 $$
 which we can implement in R using the following code:
 ```{r }
-
+lm1 <- lm(Data.gdp$log.gdp2 ~ 1)
+summary(lm1)
 ```
 Using this summary function, you can focus on the part that says `Coefficients` and 
 (for now) ignoring the rest. The output is telling us that our estimate for 
 $\beta_0$, the mean of $Y_i$, is $3.2384$. We can check this with
 ```{r }
-
+lm1$coef
+mean(Data.gdp$log.gdp2)
 ```
 and we get the same answer. The next column gives the standard error. Recall that 
 the standard error of the sample mean is $\widehat \sigma_Y/ \sqrt{n}$, where 
 $\widehat \sigma_Y$ is the sample standard deviation of $Y$. We can calculate 
 the standard error using
 ```{r }
-
+n <- length(Data.gdp$log.gdp2)
+se <- sd(Data.gdp$log.gdp2) / sqrt(n)
+se
 ```
 
 ## Creating a Confidence Interval Using the Normal Approximation
@@ -129,11 +136,11 @@ When we use the Normal Approximation, we create a 95% confidence interval
 by taking the interval that ranges from 1.96 standard errors below the sample 
 mean to 1.96 standard errors above the standard mean:
 ```{r }
-
+c(mean(Data.gdp$log.gdp2) - 1.96 * se, mean(Data.gdp$log.gdp2) + 1.96 * se)
 ```
 We could create a 90% confidence interval 
 ```{r }
-
+c(mean(Data.gdp$log.gdp2) - 1.64 * se, mean(Data.gdp$log.gdp2) + 1.64 * se)
 ```
 
 ## Creating a Confidence Interval Using the Bootstrap
@@ -151,13 +158,21 @@ element multiple times.  The `sample` function is a means of simulating
 the box-models discussed in the book.  To see precisely what the function 
 is doing, look at the following loop:
 ```{r }
-
+for (i in 1:10) {
+  boot.samp <- sample(1:5, size = 5, replace = TRUE)
+  print(boot.samp)
+}
 ```
 Each of the rows gives the indices for a *bootstrapped sample*.  We have more 
 than 5 observations in our data, so we are going to run our bootstrap so that it 
 samples from `1:n`.  The code for calculating the bootstrapped sample mean is 
 ```{r }
-
+boot.mean <- NULL
+for (i.boot in 1:5000) {
+  boot.samp <- sample(1:n, size = n, replace = TRUE)
+  Data.boot <- Data.gdp[boot.samp, ]
+  boot.mean[i.boot]  <- lm(Data.boot$log.gdp2 ~ 1)$coef
+}
 ```
 Now, we are going to use the function `quantile` to recover our 95% confidence 
 interval.  The syntax for the command is
@@ -169,11 +184,11 @@ interval, we want to take the quantiles at the probabilities
 `c(0.025, 0.975)`, since 0.975 - 0.025 = 0.95 and the two numbers add up to 1. 
 We get
 ```{r }
-
+quantile(boot.mean, probs = c( 0.025, 0.975))
 ```
 We could also calculate a 90% bootstrapped confidence interval, using
 ```{r }
-
+quantile(boot.mean, probs = c(0.05, 0.95))
 ```
 The bootstrapped confidence intervals are quite close to that from using the 
 Normal Approximation. This approximation is quite accurate *most* of the time; 
@@ -339,12 +354,22 @@ We are going to come back to this data a few times.  First, let's read in the
 data and look at the baseline voting rate, for those who received no 
 treatment:
 ```{r } 
+GG <- read.table("data/apsr_corrected_latest.txt")
+head(GG)
+summary(GG)
 
+notreat.sub <- (GG$mailgrp == 0) & 
+               (GG$persngrp == 0) & 
+               (GG$phonegrp == 0)
+control.mean <- mean(GG$voted98[notreat.sub == 1])
+control.mean
 ```
 Now, mailing (may?) have an effect that is close to zero: approximately 1.1 
 percentage points:
 ```{r }
-
+mail.mean <- mean(GG$voted98[GG$mailgrp == 1])
+mail.mean 
+mail.mean - control.mean
 ```
 A candidate, though, may want to know if a particular combination of appeals and 
 mailings may be more effective.  We are going to assess this in the next loop. 
@@ -354,7 +379,19 @@ is that we loop through two different counters: one for the number of mailings
 
 The code follows:
 ```{r }
-
+effects.out <- NULL
+for (i.num in 1:3) {
+  for (i.appeal in 1:3) {
+    mail.sub <- (GG$mailgrp == 1) &
+                (GG$appeal == i.appeal) &
+                (GG$mailings == i.num)
+    outcome.sub <- mean(GG$voted98[mail.sub])
+    output <- c(i.num, i.appeal, outcome.sub - control.mean)
+    effects.out <- rbind(effects.out, output) 
+  }
+}
+colnames(effects.out) <- c("number", "appeal", "effect")
+effects.out
 ```
 It appears that receiving 3 mailings of appeal 3 may be the most effective.  
 If you are wary of this result, though, you are probably correct. First, what 
