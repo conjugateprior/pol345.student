@@ -18,7 +18,46 @@ Experimentally, the package can be updated while installed by calling
 
     update_package()
     
-In case help caches get confused, restarting the R session may be required.
+In case caches get confused, restarting the R session may be required.
+
+## Usage
+
+### Working on a handout
+
+To start work on handout one, type
+```
+get_handout(1)
+```
+This will unpack the handout materials into a folder called
+`handout1` in your *current working directory*.
+(Type `getwd()` if you're not sure where that is. 
+You can change it using `setwd` or through RStudio's 
+Session menu).
+
+If you want to *fresh start* on the same handout, you'll can unpack 
+again under a different name (the `get_handout` function won't
+overwrite an existing folder.) To do this add a 
+`newname` argument when y ou call the function. So, if you want 
+your new copy to be called "handout1-for-real", then use 
+```
+get_handout(1, newname = "handout1-for-real")
+```
+Provided there's not already a folder of that name in your 
+current working directory, you'll get a fresh set of 
+handout materials unpacked there.
+
+If you want to preview the questions in a handout materials *without* 
+unpacking it into your local file system, use
+```
+preview_handout(1)
+```
+
+### Working on a precept
+
+Working on precept is just the same; just use
+`get_precept(1)`, 
+`get_precept(1, newname = "precept1-second-go")`, or 
+`preview_precept(1)` as above.
 
 ## Notes
 
