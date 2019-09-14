@@ -7,7 +7,7 @@
 \title{The pol345.student Package}
 \description{
 This package contains handouts for
-Marc Ratkowic's version of POL 345.
+Marc Ratkovic and Will Lowe's version of POL 345.
 }
 \section{Unpacking Handout Materials}{
 

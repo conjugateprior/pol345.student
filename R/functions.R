@@ -252,7 +252,7 @@ preview_handout <- function(pnum){
 
   tmp <- tempdir()
   utils::unzip(f, exdir = tmp)
-  pdf <- file.path(tmp, pname, paste0(pname, ".pdf"))
+  pdf <- file.path(tmp, pname, paste0(pname, "_print.pdf"))
   if (file.exists(pdf))
     utils::browseURL(pdf)
   else

@@ -1,6 +1,6 @@
 Package: pol345.student
 Title: Handout and Precept Materials for POL 345
-Version: 0.1.99
+Version: 0.2.01
 Authors@R: c(
   person("Will", "Lowe", email = "wlowe@princeton.edu", role = c("aut", "cre")), 
   person("Marc", "Ratkovic", email = "ratkovic@princeton.edu", role = "ctb"))
@@ -9,7 +9,7 @@ Description: This package allows students to unpack and view the
              Princeton's Politics 345 class.
 Depends: R (>= 3.3)
 Imports: cli
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Suggests: testthat,
   knitr,
   rmarkdown,
