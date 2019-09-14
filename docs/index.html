@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">pol345.student</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
 <h2 class="hasAnchor">
 <a href="#updates" class="anchor"></a>Updates</h2>
 <p>Experimentally, the package can be updated while installed by calling</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">update_package</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="reference/update_package.html">update_package</a></span>()</a></code></pre></div>
 <p>In case caches get confused, restarting the R session may be required.</p>
 </div>
 <div id="usage" class="section level2">
@@ -92,18 +92,18 @@
 <h3 class="hasAnchor">
 <a href="#working-on-a-handout" class="anchor"></a>Working on a handout</h3>
 <p>To start work on handout one, type</p>
-<pre><code>get_handout(1)</code></pre>
+<pre><code><a href="reference/get_handout.html">get_handout(1)</a></code></pre>
 <p>This will unpack the handout materials into a folder called <code>handout1</code> in your <em>current working directory</em>. (Type <code><a href="https://rdrr.io/r/base/getwd.html">getwd()</a></code> if you’re not sure where that is. You can change it using <code>setwd</code> or through RStudio’s Session menu).</p>
 <p>If you want to <em>fresh start</em> on the same handout, you’ll can unpack again under a different name (the <code>get_handout</code> function won’t overwrite an existing folder.) To do this add a <code>newname</code> argument when y ou call the function. So, if you want your new copy to be called “handout1-for-real”, then use</p>
-<pre><code>get_handout(1, newname = "handout1-for-real")</code></pre>
+<pre><code><a href="reference/get_handout.html">get_handout(1, newname = "handout1-for-real")</a></code></pre>
 <p>Provided there’s not already a folder of that name in your current working directory, you’ll get a fresh set of handout materials unpacked there.</p>
 <p>If you want to preview the questions in a handout materials <em>without</em> unpacking it into your local file system, use</p>
-<pre><code>preview_handout(1)</code></pre>
+<pre><code><a href="reference/preview_handout.html">preview_handout(1)</a></code></pre>
 </div>
 <div id="working-on-a-precept" class="section level3">
 <h3 class="hasAnchor">
 <a href="#working-on-a-precept" class="anchor"></a>Working on a precept</h3>
-<p>Working on precept is just the same; just use <code>get_precept(1)</code>, <code>get_precept(1, newname = "precept1-second-go")</code>, or <code>preview_precept(1)</code> as above.</p>
+<p>Working on precept is just the same; just use <code><a href="reference/get_precept.html">get_precept(1)</a></code>, <code><a href="reference/get_precept.html">get_precept(1, newname = "precept1-second-go")</a></code>, or <code><a href="reference/preview_precept.html">preview_precept(1)</a></code> as above.</p>
 </div>
 </div>
 <div id="notes" class="section level2">
