@@ -13,6 +13,7 @@ RoxygenNote: 6.1.1
 Suggests: testthat,
   knitr,
   rmarkdown,
+  emo,
   devtools
 License: GPL-3 + file LICENSE
 Encoding: UTF-8

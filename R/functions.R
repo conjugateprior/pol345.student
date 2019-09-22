@@ -109,6 +109,7 @@ get_handout <- function(pnum, newname = NULL){
   if (dir.exists(temp))
     unlink(temp, recursive = TRUE) # bye
 
+  cli::cat_line(emo::ji("smile"), emo::ji("smile"), emo::ji("smile"))
   cli::cat_line("Hint: To start working on this handout", col = "darkgray")
   cli::cat_line("")
   cli::cat_bullet('setwd("', dname, '")',
