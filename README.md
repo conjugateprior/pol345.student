@@ -2,7 +2,7 @@
 
 `pol345.student` allows students to unpack and complete questions
 in the pre-precept handouts for Princeton University's course 
-Politics 345 (as run by Marc Ratkovic and Will Lowe in Fall 2018).
+Politics 345 (as run by Marc Ratkovic and Will Lowe in Fall 2019).
 
 ## Installation
 
@@ -12,13 +12,13 @@ the package from GitHub like this:
 
     devtools::install_github("conjugateprior/pol345.student")
 
-## Updates
+## Updating
 
-Experimentally, the package can be updated while installed by calling 
+The package can be updated while installed by calling 
 
     update_package()
     
-In case caches get confused, restarting the R session may be required.
+In case caches get confused, restart your R session and load the library
 
 ## Usage
 
@@ -59,10 +59,20 @@ Working on precept is just the same; just use
 `get_precept(1, newname = "precept1-second-go")`, or 
 `preview_precept(1)` as above.
 
+### Sneak preview
+
+You can view precept 1's 'answers' with
+```{r}
+get_precept_answers(1)
+```
+Note: this shows one way to answer the questions. Often 
+there will be others, so do not automatically assume that 
+your code is incorrect if it does not match the code in the 
+answers.
+
 ## Notes
 
-* This package contains all the questions, all the data, but none of the
-  answers!
+* This package contains all the questions, all the data, and precept answers
 * Eventually we'll be replaced by a `learnr` based setup.  In the meantime,
   we're in regular `Rmd`.
 

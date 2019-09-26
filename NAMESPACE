@@ -2,6 +2,7 @@
 
 export(get_handout)
 export(get_precept)
+export(get_precept_answers)
 export(preview_handout)
 export(preview_precept)
 export(rename_for_upload)

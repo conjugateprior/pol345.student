@@ -260,6 +260,24 @@ preview_handout <- function(pnum){
     message("Sorry. There doesn't seem to be a preview available for that handout")
 }
 
+#' Show Precept Answers
+#'
+#' Launches the pdf viewer to show the questions and answers
+#' in a precept.
+#'
+#' @param pnum precept number
+#'
+#' @return Nothing.
+#' @export
+#'
+get_precept_answers <- function(pnum){
+  pdf <- system.file(file.path("extdata", paste0("precept", pnum, "-inst.pdf")),
+              package = "pol345.student")
+  if (pdf == "")
+    stop("Cannot locate the precept answers for precept ", pnum)
+  utils::browseURL(pdf)
+}
+
 
 
 #' Rename File to Add Your netid
