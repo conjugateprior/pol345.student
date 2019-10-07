@@ -1,6 +1,6 @@
 Package: pol345.student
 Title: Handout and Precept Materials for POL 345
-Version: 0.2.02
+Version: 0.2.03
 Authors@R: c(
   person("Will", "Lowe", email = "wlowe@princeton.edu", role = c("aut", "cre")), 
   person("Marc", "Ratkovic", email = "ratkovic@princeton.edu", role = "ctb"))
