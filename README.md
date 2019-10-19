@@ -19,6 +19,7 @@ Experimentally, the package can be updated while installed by calling
     update_package()
     
 In case caches get confused, restarting the R session may be required.
+If you are in RStudio you can do that from the menu: `Session > Restart R`
 
 ## Usage
 
@@ -59,11 +60,6 @@ Working on precept is just the same; just use
 `get_precept(1, newname = "precept1-second-go")`, or 
 `preview_precept(1)` as above.
 
-## Notes
-
-* This package contains all the questions, all the data, but none of the
-  answers!
-* Eventually we'll be replaced by a `learnr` based setup.  In the meantime,
-  we're in regular `Rmd`.
+## Status
 
 [![Travis-CI Build Status](https://travis-ci.org/conjugateprior/pol345.student.svg?branch=master)](https://travis-ci.org/conjugateprior/pol345.student) [![Build status](https://ci.appveyor.com/api/projects/status/rfj426c7ddq4ni72?svg=true)](https://ci.appveyor.com/project/conjugateprior/pol345-student)
