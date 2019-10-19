@@ -18,7 +18,8 @@ The package can be updated while installed by calling
 
     update_package()
     
-In case caches get confused, restart your R session and load the library
+For good measure, now *restart* your R session. In RStudio use the menu: 
+`Session > Restart R`.
 
 ## Usage
 
@@ -70,10 +71,6 @@ there will be others, so do not automatically assume that
 your code is incorrect if it does not match the code in the 
 answers.
 
-## Notes
-
-* This package contains all the questions, all the data, and precept answers
-* Eventually we'll be replaced by a `learnr` based setup.  In the meantime,
-  we're in regular `Rmd`.
+## Status
 
 [![Travis-CI Build Status](https://travis-ci.org/conjugateprior/pol345.student.svg?branch=master)](https://travis-ci.org/conjugateprior/pol345.student) [![Build status](https://ci.appveyor.com/api/projects/status/rfj426c7ddq4ni72?svg=true)](https://ci.appveyor.com/project/conjugateprior/pol345-student)

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">pol345.student</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4</span>
       </span>
     </div>
 
@@ -68,22 +68,22 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="the-pol345-student-package" class="section level1">
+<div id="the-pol345student-package" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#the-pol345-student-package" class="anchor"></a>The pol345.student package</h1></div>
+<a href="#the-pol345student-package" class="anchor"></a>The pol345.student package</h1></div>
 <p><code>pol345.student</code> allows students to unpack and complete questions in the pre-precept handouts for Princeton University’s course Politics 345 (as run by Marc Ratkovic and Will Lowe in Fall 2019).</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The problem sets are a bit too big for CRAN, so you’ll want to make sure you’ve got the <code>devtools</code> package installed. Then grab the package from GitHub like this:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"conjugateprior/pol345.student"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"conjugateprior/pol345.student"</span>)</a></code></pre></div>
 </div>
 <div id="updating" class="section level2">
 <h2 class="hasAnchor">
 <a href="#updating" class="anchor"></a>Updating</h2>
 <p>The package can be updated while installed by calling</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="reference/update_package.html">update_package</a></span>()</a></code></pre></div>
-<p>In case caches get confused, restart your R session and load the library</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="reference/update_package.html">update_package</a></span>()</a></code></pre></div>
+<p>For good measure, now <em>restart</em> your R session. In RStudio use the menu: <code>Session &gt; Restart R</code>.</p>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -113,13 +113,9 @@
 <p>Note: this shows one way to answer the questions. Often there will be others, so do not automatically assume that your code is incorrect if it does not match the code in the answers.</p>
 </div>
 </div>
-<div id="notes" class="section level2">
+<div id="status" class="section level2">
 <h2 class="hasAnchor">
-<a href="#notes" class="anchor"></a>Notes</h2>
-<ul>
-<li>This package contains all the questions, all the data, and precept answers</li>
-<li>Eventually we’ll be replaced by a <code>learnr</code> based setup. In the meantime, we’re in regular <code>Rmd</code>.</li>
-</ul>
+<a href="#status" class="anchor"></a>Status</h2>
 <p><a href="https://travis-ci.org/conjugateprior/pol345.student"><img src="https://travis-ci.org/conjugateprior/pol345.student.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://ci.appveyor.com/project/conjugateprior/pol345-student"><img src="https://ci.appveyor.com/api/projects/status/rfj426c7ddq4ni72?svg=true" alt="Build status"></a></p>
 </div>
 </div>
@@ -160,7 +156,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
 
       </footer>
