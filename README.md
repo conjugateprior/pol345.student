@@ -2,7 +2,9 @@
 
 `pol345.student` allows students to unpack and complete questions
 in the pre-precept handouts for Princeton University's course 
-Politics 345 (as run by Marc Ratkovic and Will Lowe in Fall 2019).
+Politics 345.  This updated package is designed for the Fall 2021
+Semster and was originally developed by Will Lowe and Marc Ratkovic 
+in Fall 2019.
 
 ## Installation
 
@@ -10,7 +12,7 @@ The problem sets are a bit too big for CRAN, so you'll want to
 make sure you've got the `devtools` package installed.  Then grab
 the package from GitHub like this:
 
-    devtools::install_github("conjugateprior/pol345.student")
+    devtools::install_github("ratkovic/pol345.student")
 
 ## Updating
 
