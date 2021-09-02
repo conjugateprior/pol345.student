@@ -4,14 +4,48 @@ Hello! Welcome to POL 345 / SOC 305 / WWS 201. In order to participate in the co
 
 ## Install R
 
-For both Mac and Windows users, please visit [https://cran.rstudio.com] and download
-R for your operating system.  Mac users please click on `Download R for macOS` and
-download the lastest release.  Windows users please click on `Download R for Windows` click on `Install R for the First Time`
-and follow the prompts.
+You will need to download and install several software packages as part of this course.  Instructions are below.
 
 ### Mac Users
 
-Download and install this package
+1. Download and install [https://cran.rstudio.com/bin/macosx/base/R-4.1.1.pkg]
+
+2. Open your Terminal Application (you’ll find it in the Applications > Utilities folder) and type
+
+`xcode-select --install`
+
+3. Say yes to install the ‘command line tools’. (Machine tells you you’ve got them already? Then we’re all good.)
+
+### Windows Users
+
+1. Download and install [https://cran.rstudio.com/bin/windows/base/R-4.1.1-win.exe]
+
+2. Download and install [https://cran.rstudio.com/bin/windows/Rtools/rtools40v2-x86_64.exe]
+
+If, in the steps above, you allowed R and RStudio to put an icon on your desktop then you now have two. Put R’s icon in
+the trash and keep the RStudio one. Things will be less confusing that way.
+
+## Install LaTeX for making PDF documents
+
+Everybody
+
+1. OpenRStudio
+
+3. Paste the following command into the Console. (It’s at the bottom left of the application window)
+ `install.packages('tinytex') `
+ 
+ `tinytex::install_tinytex() # takes a while`
+ 
+4. Still in RStudio, select menu File > New File > RMarkdown
+5. Click the Knit icon at the top of the file that just opened (it’s a ball of blue wool with a knitting needle in it) If all goes well a PDF document will be created.
+
+You’re all set!
+
+### Workaround
+
+Alternatively, you can simply generate Word documents rather than pdf documents for the work handed in during the course. If you choose to do this, you should remember to ‘print to pdf’ these documents before uploading to Blackboard.
+
+To check Word document creation works, go to the RMarkdown document you created above and instead of clicking on the Knit button, press the menu indicator just to the right of it and choose ‘Knit to Word’.
 
 # The pol345.student package
 
