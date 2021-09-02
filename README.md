@@ -12,7 +12,7 @@ The first piece of software we will install is R, which we will use for our stat
 
 2. Open your Terminal Application (you’ll find it in the Applications > Utilities folder) and type
 
-`xcode-select --install`
+   `xcode-select --install`
 
 3. Say yes to install the ‘command line tools’. (Machine tells you you’ve got them already? Then we’re all good.)
 
