@@ -67,12 +67,12 @@ in Fall 2019.
 The problem sets are a bit too big for CRAN, so you'll want to
 make sure you've got the `devtools` package installed.  To do so, you can run
 
-   `install.packages('devtools')`
+   install.packages('devtools')
 
 
 Then grab the package from GitHub like this:
 
-    `devtools::install_github("ratkovic/pol345.student")`
+    devtools::install_github("ratkovic/pol345.student")
 
 ## Updating
 
