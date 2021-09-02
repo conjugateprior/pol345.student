@@ -4,7 +4,7 @@ Hello! Welcome to POL 345 / SOC 305 / WWS 201. In order to participate in the co
 
 ## Install R
 
-You will need to download and install several software packages as part of this course.  Instructions are below.
+The first piece of software we will install is R, which we will use for our statistical work.
 
 ### Mac Users
 
@@ -26,6 +26,9 @@ If, in the steps above, you allowed R and RStudio to put an icon on your desktop
 the trash and keep the RStudio one. Things will be less confusing that way.
 
 ## Install RStudio
+
+The second piece of software we will install is RStudio, which will be provide a nice interface with R.
+
 Go to [Rstudio's download page](https://www.rstudio.com/products/rstudio/download/) and find the section `RStudio Desktop`.  We have already done step 1, so proceed to step 2 and download Rstudio for your operating system.
 
 If, in the steps above, you allowed R and RStudio to put an icon on your desktop then you now have two. Put R’s icon in
@@ -33,7 +36,9 @@ the trash and keep the RStudio one. Things will be less confusing that way.
 
 ## Install LaTeX for making PDF documents
 
-Everybody
+Lastly, we will install LaTeX, which will allow you to compile your assignments to a PDF for submission.
+
+For both Mac and Windows users,
 
 1. OpenRStudio
 
