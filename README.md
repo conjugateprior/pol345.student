@@ -44,9 +44,9 @@ For both Mac and Windows users,
 
 3. Paste the following command into the Console. (It’s at the bottom left of the application window)
 
-         `install.packages('tinytex') `
+         install.packages('tinytex') 
          
-         `tinytex::install_tinytex() # takes a while`
+         tinytex::install_tinytex() # takes a while
  
 4. Still in RStudio, select menu File > New File > RMarkdown
 5. Click the Knit icon at the top of the file that just opened (it’s a ball of blue wool with a knitting needle in it) If all goes well a PDF document will be created.
