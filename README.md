@@ -38,6 +38,7 @@ Everybody
 1. OpenRStudio
 
 3. Paste the following command into the Console. (It’s at the bottom left of the application window)
+
  `install.packages('tinytex') `
  
  `tinytex::install_tinytex() # takes a while`
@@ -64,10 +65,14 @@ in Fall 2019.
 ## Installation
 
 The problem sets are a bit too big for CRAN, so you'll want to
-make sure you've got the `devtools` package installed.  Then grab
-the package from GitHub like this:
+make sure you've got the `devtools` package installed.  To do so, you can run
 
-    devtools::install_github("ratkovic/pol345.student")
+   `install.packages('devtools')`
+
+
+Then grab the package from GitHub like this:
+
+    `devtools::install_github("ratkovic/pol345.student")`
 
 ## Updating
 
