@@ -25,6 +25,12 @@ You will need to download and install several software packages as part of this 
 If, in the steps above, you allowed R and RStudio to put an icon on your desktop then you now have two. Put R’s icon in
 the trash and keep the RStudio one. Things will be less confusing that way.
 
+## Install RStudio
+Go to [https://www.rstudio.com/products/rstudio/download/] and find the section `RStudio Desktop`.  We have already done step 1, so proceed to step 2 and download Rstudio for your operating system.
+
+If, in the steps above, you allowed R and RStudio to put an icon on your desktop then you now have two. Put R’s icon in
+the trash and keep the RStudio one. Things will be less confusing that way.
+
 ## Install LaTeX for making PDF documents
 
 Everybody
