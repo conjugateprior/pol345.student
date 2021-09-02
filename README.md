@@ -1,3 +1,18 @@
+# Getting Started with R and R Studio
+
+Hello! Welcome to POL 345 / SOC 305 / WWS 201. In order to participate in the course, you will need to install three pieces of software onto your computer.
+
+## Install R
+
+For both Mac and Windows users, please visit [https://cran.rstudio.com] and download
+R for your operating system.  Mac users please click on `Download R for macOS` and
+download the lastest release.  Windows users please click on `Download R for Windows` click on `Install R for the First Time`
+and follow the prompts.
+
+### Mac Users
+
+Download and install this package
+
 # The pol345.student package
 
 `pol345.student` allows students to unpack and complete questions
