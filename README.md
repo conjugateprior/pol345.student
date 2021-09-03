@@ -42,12 +42,18 @@ For both Mac and Windows users,
 
 1. OpenRStudio
 
-3. Paste the following command into the Console. (It’s at the bottom left of the application window)
+2. Paste the following command into the Console. (It’s at the bottom left of the application window)
 
          install.packages('tinytex') 
          
          tinytex::install_tinytex() # takes a while
- 
+
+3. NOTE for Mac users: You may get this error after running the second command above: `The directory /usr/local/bin is not writable. I recommend that you make it writable.` After the installation process finishes, another error most likely will appear stating `add_link_dir_dir: destination /usr/local/bin not writable.` Run the following commands in Terminal to resolve this:
+
+         sudo chown -R `whoami`:admin /usr/local/bin 
+         
+         ~/Library/TinyTeX/bin/*/tlmgr path add
+
 4. Still in RStudio, select menu File > New File > RMarkdown
 5. Click the Knit icon at the top of the file that just opened (it’s a ball of blue wool with a knitting needle in it) If all goes well a PDF document will be created.
 
@@ -83,7 +89,7 @@ Then grab the package from GitHub like this:
 
 The package can be updated while installed by calling 
 
-    update_package()
+    pol345.student::update_package()
     
 For good measure, now *restart* your R session. In RStudio use the menu: 
 `Session > Restart R`.
@@ -94,7 +100,7 @@ For good measure, now *restart* your R session. In RStudio use the menu:
 
 To start work on handout one, type
 ```
-get_handout(1)
+pol345.student::get_handout(1)
 ```
 This will unpack the handout materials into a folder called
 `handout1` in your *current working directory*.
@@ -108,7 +114,7 @@ overwrite an existing folder.) To do this add a
 `newname` argument when y ou call the function. So, if you want 
 your new copy to be called "handout1-for-real", then use 
 ```
-get_handout(1, newname = "handout1-for-real")
+pol345.student::get_handout(1, newname = "handout1-for-real")
 ```
 Provided there's not already a folder of that name in your 
 current working directory, you'll get a fresh set of 
@@ -117,7 +123,7 @@ handout materials unpacked there.
 If you want to preview the questions in a handout materials *without* 
 unpacking it into your local file system, use
 ```
-preview_handout(1)
+pol345.student::preview_handout(1)
 ```
 
 ### Working on a precept
@@ -131,7 +137,7 @@ Working on precept is just the same; just use
 
 You can view precept 1's 'answers' with
 ```{r}
-get_precept_answers(1)
+pol345.student::get_precept_answers(1)
 ```
 Note: this shows one way to answer the questions. Often 
 there will be others, so do not automatically assume that 
