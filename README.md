@@ -48,11 +48,20 @@ For both Mac and Windows users,
          
          tinytex::install_tinytex() # takes a while
 
-3. NOTE for Mac users: You may get this error after running the second command above: `The directory /usr/local/bin is not writable. I recommend that you make it writable.` After the installation process finishes, another error most likely will appear stating `add_link_dir_dir: destination /usr/local/bin not writable.` Run the following commands in Terminal to resolve this:
+3. NOTE for Mac users: You _may_ get this error after running the second command above: 
+
+`The directory /usr/local/bin is not writable. I recommend that you make it writable.` 
+
+After the installation process finishes, another error most likely will appear stating 
+`add_link_dir_dir: destination /usr/local/bin not writable.`
+
+Run the following commands in Terminal to resolve this:
 
          sudo chown -R `whoami`:admin /usr/local/bin 
          
          ~/Library/TinyTeX/bin/*/tlmgr path add
+
+where `whoami` is the name you use to log in to your Mac.
 
 4. Still in RStudio, select menu File > New File > RMarkdown
 5. Click the Knit icon at the top of the file that just opened (it’s a ball of blue wool with a knitting needle in it) If all goes well a PDF document will be created.
@@ -97,7 +106,7 @@ This will allow you to call all the functions in the package.  This needs to be 
 
 The package can be updated while installed by calling 
 
-    pol345.student::update_package()
+    update_package()
     
 For good measure, now *restart* your R session. In RStudio use the menu: 
 `Session > Restart R`.
