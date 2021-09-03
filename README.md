@@ -1,16 +1,83 @@
+# Getting Started with R and R Studio
+
+Hello! Welcome to POL 345 / SOC 305 / WWS 201. In order to participate in the course, you will need to install three pieces of software onto your computer.
+
+## Install R
+
+The first piece of software we will install is R, which we will use for our statistical work.
+
+### Mac Users
+
+1. Download and install [R for Mac](https://cran.rstudio.com/bin/macosx/base/R-4.1.1.pkg)
+
+2. Open your Terminal Application (you’ll find it in the Applications > Utilities folder) and type
+
+   `xcode-select --install`
+
+3. Say yes to install the ‘command line tools’. (Machine tells you you’ve got them already? Then we’re all good.)
+
+### Windows Users
+
+1. Download and install [R for Windows](https://cran.rstudio.com/bin/windows/base/R-4.1.1-win.exe)
+
+2. Download and install [Rtools for Windows](https://cran.rstudio.com/bin/windows/Rtools/rtools40v2-x86_64.exe)
+
+If, in the steps above, you allowed R and RStudio to put an icon on your desktop then you now have two. Put R’s icon in
+the trash and keep the RStudio one. Things will be less confusing that way.
+
+## Install RStudio
+
+The second piece of software we will install is RStudio, which will be provide a nice interface with R.
+
+Go to [Rstudio's download page](https://www.rstudio.com/products/rstudio/download/) and find the section `RStudio Desktop`.  We have already done step 1, so proceed to step 2 and download Rstudio for your operating system.
+
+If, in the steps above, you allowed R and RStudio to put an icon on your desktop then you now have two. Put R’s icon in
+the trash and keep the RStudio one. Things will be less confusing that way.
+
+## Install LaTeX for making PDF documents
+
+Lastly, we will install LaTeX, which will allow you to compile your assignments to a PDF for submission.
+
+For both Mac and Windows users,
+
+1. OpenRStudio
+
+3. Paste the following command into the Console. (It’s at the bottom left of the application window)
+
+         install.packages('tinytex') 
+         
+         tinytex::install_tinytex() # takes a while
+ 
+4. Still in RStudio, select menu File > New File > RMarkdown
+5. Click the Knit icon at the top of the file that just opened (it’s a ball of blue wool with a knitting needle in it) If all goes well a PDF document will be created.
+
+You’re all set!
+
+### Workaround
+
+Alternatively, you can simply generate Word documents rather than pdf documents for the work handed in during the course. If you choose to do this, you should remember to ‘print to pdf’ these documents before uploading to Blackboard.
+
+To check Word document creation works, go to the RMarkdown document you created above and instead of clicking on the Knit button, press the menu indicator just to the right of it and choose ‘Knit to Word’.
+
 # The pol345.student package
 
 `pol345.student` allows students to unpack and complete questions
 in the pre-precept handouts for Princeton University's course 
-Politics 345 (as run by Marc Ratkovic and Will Lowe in Fall 2019).
+Politics 345.  This updated package is designed for the Fall 2021
+Semster and was originally developed by Will Lowe and Marc Ratkovic 
+in Fall 2019.
 
 ## Installation
 
 The problem sets are a bit too big for CRAN, so you'll want to
-make sure you've got the `devtools` package installed.  Then grab
-the package from GitHub like this:
+make sure you've got the `devtools` package installed.  To do so, you can run
 
-    devtools::install_github("conjugateprior/pol345.student")
+    install.packages('devtools')
+
+
+Then grab the package from GitHub like this:
+
+    devtools::install_github("ratkovic/pol345.student")
 
 ## Updating
 
