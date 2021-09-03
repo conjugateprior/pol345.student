@@ -78,6 +78,14 @@ make sure you've got the `devtools` package installed.  To do so, you can run
 Then grab the package from GitHub like this:
 
     devtools::install_github("ratkovic/pol345.student")
+    
+## Loading the Package
+
+In order to access the course materials, you will need to load the library. This can be done with the command
+
+    library(pol345.student)
+
+This will allow you to call all the functions in the package.  This needs to be run only once per session.
 
 ## Updating
 
