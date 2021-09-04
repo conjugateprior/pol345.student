@@ -316,7 +316,7 @@ rename_for_upload <- function(fname){
 #' Update the package
 #'
 #' This function updates the package by running
-#' \code{devtools::install_github("conjugateprior/pol345.student")}.
+#' \code{devtools::install_github("ratkovic/pol345.student")}.
 #'
 #' @return Nothing
 #' @export
