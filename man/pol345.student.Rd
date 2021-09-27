@@ -3,7 +3,6 @@
 \docType{package}
 \name{pol345.student}
 \alias{pol345.student}
-\alias{pol345.student-package}
 \title{The pol345.student Package}
 \description{
 This package contains handouts for
